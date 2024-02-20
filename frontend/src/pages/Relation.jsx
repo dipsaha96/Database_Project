@@ -18,19 +18,23 @@ function Relation() {
                 <table>
                     <thead>
                         <tr>
-                            <th>Relation ID</th>
                             <th>Student ID</th>
+                            <th>Student Name</th>
+                            <th>Student Department name</th>
                             <th>Teacher ID</th>
-                            <th>Course ID</th>
+                            <th>Teacher Name</th>
+                            <th>Teacher Department Name</th>
                         </tr>
                     </thead>
                     <tbody>
                         {relations.map((relation, index) => (
                             <tr key={index}>
-                                <td>{relation.relation_id}</td>
                                 <td>{relation.student_id}</td>
+                                <td>{relation.student_name}</td>
+                                <td>{relation.student_department_name}</td>
                                 <td>{relation.teacher_id}</td>
-                                <td>{relation.course_id}</td>
+                                <td>{relation.teacher_name}</td>
+                                <td>{relation.teacher_department_name}</td>
                             </tr>
                         ))}
                     </tbody>

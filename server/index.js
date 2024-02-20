@@ -190,6 +190,30 @@ async function run() {
             }
         });
 
+        app.get('/relation', async (req, res) => {
+            try {
+                const sql = `
+                SELECT
+                s.student_id,
+                s.name AS student_name,
+                s.department_id AS student_department_id,
+                t.teacher_id,
+                t.name AS teacher_name,
+                t.department_id AS teacher_department_id
+                FROM
+                student s
+                JOIN
+                teacher t ON s.department_id = t.department_id;
+	
+                `;
+                const result = await pool.query(sql);
+                res.json(result.rows);
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+
     } finally {
         // console.log("Shutting down server");
         // pool.end();
