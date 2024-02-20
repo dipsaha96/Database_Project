@@ -1,0 +1,40 @@
+.student-container {
+    margin-top: 20px;
+    text-align: center;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+.student-heading {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.student-table {
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* Center align */
+    border-collapse: collapse;
+    border: 1px solid #ddd; /* Add table border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for elevation */
+}
+
+.student-table th, .student-table td {
+    padding: 12px;
+    border: 1px solid #ddd;
+}
+
+.student-table th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0; /* Add border-radius to top header cells */
+    position: sticky;
+    top: 0;
+    z-index: 1;
+}
+
+.student-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9; /* Lighter alternating row color */
+}
+
+.student-table tbody tr:hover {
+    background-color: #f2f2f2; /* Hover color */
+}

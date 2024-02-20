@@ -146,6 +146,49 @@ async function run() {
                 res.status(500).json({ error: "Internal Server Error" });
             }
         });
+        app.get("/course", async (req, res) => {
+            try {
+                const sql = `
+                SELECT C.COURSE_ID,
+	            C.COURSE_TITLE,
+	            D.NAME AS COURSE_BELONGS_TO,
+	            C.TOTAL_LECTURES,
+	            C.CREDIT
+	            FROM COURSE C JOIN DEPARTMENT D
+	            ON D.DEPARTMENT_ID = C.COURSE_ID/1000;
+                `;
+                const result = await pool.query(sql);
+                res.json(result.rows);
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+
+        app.get('/department', async (req, res) => {
+            try {
+                const sql = `
+                SELECT D.NAME AS DEPARTMENT_NAME,
+	            D.DEPARTMENT_ID ,
+                COUNT(T.TEACHER_ID) AS TOTAL_TEACHERS
+                FROM
+                DEPARTMENT D
+                LEFT JOIN
+                TEACHER T ON D.DEPARTMENT_ID = T.DEPARTMENT_ID
+                GROUP BY
+                D.NAME,D.DEPARTMENT_ID
+                HAVING
+                COUNT(T.TEACHER_ID) > 0
+                ORDER BY
+                TOTAL_TEACHERS DESC;
+                `;
+                const result = await pool.query(sql);
+                res.json(result.rows);
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
 
     } finally {
         // console.log("Shutting down server");
