@@ -35,3 +35,19 @@
 .course-table tbody tr:hover {
     background-color: #f2f2f2; /* Hover color */
 }
+.check-courses-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none; /* Remove underline from link */
+    display: inline-block; /* Ensure button appears inline */
+}
+
+.check-courses-button:hover {
+    background-color: #0056b3;
+}

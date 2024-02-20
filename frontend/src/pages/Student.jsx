@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../assets/CSS/login.css'; // Import CSS file for styling
+import '../assets/CSS/student.css'; // Import CSS file for styling
 
 function Student() {
     const [students, setStudents] = useState([]);
