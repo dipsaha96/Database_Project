@@ -32,9 +32,32 @@
 }
 
 .student-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Lighter alternating row color */
+    background-color: #5c8b2a4d; /* Lighter alternating row color */
 }
 
 .student-table tbody tr:hover {
     background-color: #f2f2f2; /* Hover color */
+}
+.view-button {
+    font-size: 12px; /* Adjust the font size to make the button smaller */
+    padding: 5px 10px;
+    border-radius: 20px; /* Adjust padding to make the button smaller */
+    border: none;
+    background-color: #ff00fb; /* Default button background color */
+    color: #fff; /* Default button text color */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition effect for smoother hover */
+    width :100px ;
+}
+
+.view-button:hover {
+    background-color: #3300b3; /* Change button background color on hover */
+}
+
+.student-button:active {
+    transform: translateY(1px); /* Add slight downward movement on click */
+}
+
+.actions-column {
+    width: 100px; /* Adjust the width of the column */
 }

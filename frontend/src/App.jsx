@@ -15,6 +15,7 @@ import Student from './pages/Student';
 import Teacher from './pages/Teacher';
 import Course from './pages/Course';
 import Department from './pages/Department';
+import StudentInformation from './pages/StudentInformation';
 import Relation from './pages/Relation';
 import Rank from './components/Rank';
 import Header from './components/Nav/Header';
@@ -37,8 +38,7 @@ export default function App() {
         <Route path='/courses' element={<Course></Course>} />
         <Route path='/departments' element={<Department></Department>} />
         <Route path='/relations' element={<Relation></Relation>} />
-
-
+        <Route path="/students/:studentId" element={<StudentInformation></StudentInformation>} />
       </Route>
     )
   );

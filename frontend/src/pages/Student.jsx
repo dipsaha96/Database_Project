@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import '../assets/CSS/student.css'; // Import CSS file for styling
+import { Link } from "react-router-dom";
+import '../assets/CSS/student.css';
 
 function Student() {
     const [students, setStudents] = useState([]);
@@ -11,6 +12,12 @@ function Student() {
             .then((data) => setStudents(data))
             .catch((error) => console.error(error));
     }, []);
+
+    // Function to handle the click event of the "View Information" button
+    const handleViewInformation = (studentId) => {
+        // Log the studentId in the console
+        console.log("Student ID:", studentId);
+    };
 
     return (
         <div className="student-container">
@@ -24,6 +31,7 @@ function Student() {
                         <th>Address</th>
                         <th>Level</th>
                         <th>Term</th>
+                        <th className="actions-column">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -35,6 +43,11 @@ function Student() {
                             <td>{student.address}</td>
                             <td>{student.level}</td>
                             <td>{student.term}</td>
+                            <td className="actions-column">
+                                <Link to={`/students/${student.student_id}`} className="view-link">
+                                    <button className="view-button" onClick={() => handleViewInformation(student.student_id)}>View Information</button>
+                                </Link>
+                            </td>
                         </tr>
                     ))}
                 </tbody>

@@ -214,6 +214,33 @@ async function run() {
             }
         });
 
+        app.get('/student/:studentId', async (req, res) => {
+    const studentId = req.params.studentId;
+    console.log('Student ID:', studentId);
+    try {
+        const sql = `
+            SELECT 
+                STUDENT_ID,
+                NAME AS FULL_NAME,
+                EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM DATE_OF_BIRTH) AS AGE,
+                ADDRESS,
+                LEVEL,
+                TERM
+            FROM STUDENT 
+            WHERE STUDENT_ID = $1;
+        `;
+        const { rows } = await pool.query(sql, [studentId]);
+        if (rows.length > 0) {
+            res.json(rows[0]);
+        } else {
+            res.status(404).json({ error: 'Student not found' });
+        }
+    } catch (error) {
+        console.error('Error executing query:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
     } finally {
         // console.log("Shutting down server");
         // pool.end();
