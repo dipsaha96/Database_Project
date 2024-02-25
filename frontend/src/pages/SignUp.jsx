@@ -6,7 +6,7 @@ import { FaUserCircle, FaKey, FaEye, FaEyeSlash } from 'react-icons/fa';
 import '../assets/CSS/login.css';
 
 export default function SignUp() {
-    const [email, setEmail] = useState('');
+    const [user_id, setUserId] = useState('');
     const [password, setPassword] = useState('');
     const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -15,11 +15,11 @@ export default function SignUp() {
         console.log('Sign up form submitted');
         try {
             // Make a POST request to the backend API to sign up the user
-            await axios.post('http://localhost:8000/signup', { email, password });
+            await axios.post('http://localhost:8000/signup', { user_id, password });
             alert('Sign up successful! Please login with your new account.');
             
             // Clear the form fields after successful signup
-            setEmail('');
+            setUserId('');
             setPassword('');
         } catch (error) {
             console.error('Error during signup:', error.message);
@@ -47,9 +47,9 @@ export default function SignUp() {
                         <input
                             className="form-input"
                             type="text"
-                            placeholder="@Email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="User ID"
+                            value={user_id}
+                            onChange={(e) => setUserId(e.target.value)}
                             required
                         />
                         <br />

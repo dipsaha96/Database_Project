@@ -17,11 +17,12 @@ function Login(props) {
         try {
             const response = await axios.post('http://localhost:8000/login', { email, password, selection });
 
-            if (response.data.flag) {
-                // Redirect to admin page or perform any other action
+            if (response.data.message === 'admin') {
                 window.location.href = '/admin';
+            } else if (response.data.message === 'user') {
+                window.location.href = '/userhomepage';
             } else {
-                alert('Invalid login credentials. Please try again.');
+                setShow(true);
             }
         } catch (error) {
             console.error('Error during login:', error.message);
@@ -39,7 +40,7 @@ function Login(props) {
                 <div className="con">
                     <header className="head-form">
                         <h2>Log In</h2>
-                        <p>Login here using your username and password</p>
+                        <p>Login here using your email or user_id and password</p>
                     </header>
                     <br />
                     <div className="field-set">
@@ -50,7 +51,7 @@ function Login(props) {
                             className="form-input"
                             id="txt-input"
                             type="text"
-                            placeholder="@EmailAddress"
+                            placeholder="User_id or @EmailAddress"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required

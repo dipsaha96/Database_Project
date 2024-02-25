@@ -17,8 +17,10 @@ import Course from './pages/Course';
 import Department from './pages/Department';
 import StudentInformation from './pages/StudentInformation';
 import Relation from './pages/Relation';
+import Grade from './pages/Grade';
 import Rank from './components/Rank';
 import Header from './components/Nav/Header';
+import UserHomePage from './pages/UserHomePage';
 
 
 export default function App() {
@@ -38,7 +40,10 @@ export default function App() {
         <Route path='/courses' element={<Course></Course>} />
         <Route path='/departments' element={<Department></Department>} />
         <Route path='/relations' element={<Relation></Relation>} />
+        <Route path='/grades' element={<Grade></Grade>} />
         <Route path="/students/:studentId" element={<StudentInformation></StudentInformation>} />
+        <Route path="/userhomepage" element={<UserHomePage></UserHomePage>} />
+
       </Route>
     )
   );

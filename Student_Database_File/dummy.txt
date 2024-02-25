@@ -1,0 +1,10 @@
+in the same way
+create 10 data whose student id between 2208001 to 2208010 level 1 term 1 department id 8
+create 10 data whose student id between 2108001 to 2108010 level 2 term 1 department id 8
+create 10 data whose student id between 2008001 to 2008010 level 3 term 1 department id 8
+create 10 data whose student id between 1908001 to 1908010 level 4 term 1 department id 8
+create 10 data whose student id between 2207001 to 2207010 level 1 term 1 department id 7
+create 10 data whose student id between 2107001 to 2107010 level 2 term 1 department id 7
+create 10 data whose student id between 2007001 to 2007010 level 3 term 1 department id 7
+create 10 data whose student id between 1907001 to 1907010 level 4 term 1 department id 7
+make sure name must be different

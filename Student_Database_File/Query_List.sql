@@ -134,4 +134,35 @@ FROM
 JOIN
     teacher t ON s.department_id = t.department_id;
 	
+--STUDENT&GRADE
+
+SELECT 
+S.STUDENT_ID AS ID,
+S.NAME AS STUDENT_NAME,
+G.TERM_WISE_RESULT AS RECENT_TERM_CGPA,
+G.TOTAL_RESULT AS OVERALL_CGPA
+FROM STUDENT S JOIN GRADE G
+ON S.STUDENT_ID= G.STUDENT_ID;
+
+SELECT 
+            S.STUDENT_ID AS ID,
+            S.NAME AS STUDENT_NAME,
+            G.TERM_WISE_RESULT AS RECENT_TERM_CGPA,
+            G.TOTAL_RESULT AS OVERALL_CGPA,
+            CASE
+                WHEN G.TOTAL_RESULT >= 4.0 THEN 'A+'
+                WHEN G.TOTAL_RESULT >= 3.75 THEN 'A'
+                WHEN G.TOTAL_RESULT >= 3.5 THEN 'A-'
+                WHEN G.TOTAL_RESULT >= 3.25 THEN 'B+'
+                WHEN G.TOTAL_RESULT >= 3.0 THEN 'B'
+                WHEN G.TOTAL_RESULT >= 2.75 THEN 'B-'
+                WHEN G.TOTAL_RESULT >= 2.5 THEN 'C+'
+                WHEN G.TOTAL_RESULT >= 2.25 THEN 'C'
+                WHEN G.TOTAL_RESULT >= 2.00 THEN 'D'
+                ELSE 'F'
+            END AS GRADES
+        FROM 
+            STUDENT S 
+        JOIN 
+            GRADE G ON S.STUDENT_ID = G.STUDENT_ID;
 	

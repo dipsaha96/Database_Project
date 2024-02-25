@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import '../assets/CSS/studentInformation.css';
 
 function StudentInformation() {
     const { studentId } = useParams();
@@ -21,7 +22,7 @@ function StudentInformation() {
         <div className="student-information-container">
             <h1>Student Information</h1>
             {student && (
-                <div>
+                <div className="student-info-box">
                     <p><strong>Student ID:</strong> {student.student_id}</p>
                     <p><strong>Full Name:</strong> {student.full_name}</p>
                     <p><strong>Age:</strong> {student.age}</p>
@@ -30,8 +31,9 @@ function StudentInformation() {
                     <p><strong>Term:</strong> {student.term}</p>
                 </div>
             )}
+            <button className="update-button">Update Information</button>
         </div>
     );
 }
-
+ 
 export default StudentInformation;

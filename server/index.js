@@ -40,12 +40,12 @@ async function run() {
                 console.log("Received login request:", { email, password });
 
                 if (selection == 'user') {
-                    const result = await pool.query(`SELECT * FROM USERS WHERE EMAIL = $1 AND PASSWORD = $2`, [email, password]);
+                    const result = await pool.query(`SELECT * FROM USERS WHERE USER_ID = $1 AND PASSWORD = $2`, [email, password]);
                     console.log(result);
                     if (result.rows.length !== 0) {
-                        res.json({ flag: true });
+                        res.json({ message: "user"});
                     } else {
-                        res.json({ flag: false });
+                        res.json({ message: "error" });
                     }
                 }
 
@@ -53,9 +53,9 @@ async function run() {
                     const result = await pool.query(`SELECT * FROM ADMIN WHERE EMAIL = $1 AND PASSWORD = $2`, [email, password]);
                     console.log(result);
                     if (result.rows.length !== 0) {
-                        res.json({ flag: true });
+                        res.json({ message:"admin" });
                     } else {
-                        res.json({ flag: false });
+                        res.json({ message: "error" });
                     }
                 }
             } catch (err) {
@@ -64,17 +64,36 @@ async function run() {
             }
         });
 
+        // app.post("/signup", async (req, res) => {
+        //     const { email, password } = req.body;
+        //     try {
+        //         console.log("Received signup request:", { email, password });
+
+        //         await pool.query(`
+        //             INSERT INTO USERS (EMAIL, PASSWORD)
+        //             VALUES ($1, $2)`,
+        //             [email, password]
+        //         );
+
+        //         // Optionally, you can send a success response back to the client
+        //         res.status(201).json({ message: "Signup successful" });
+        //     } catch (error) {
+        //         console.error(`PostgreSQL Error: ${error.message}`);
+        //         res.status(500).send("Internal Server Error");
+        //     }
+        // });
+
         app.post("/signup", async (req, res) => {
-            const { email, password } = req.body;
+            const { user_id, password } = req.body;
             try {
-                console.log("Received signup request:", { email, password });
-
+                console.log("Received signup request:", { user_id, password });
+        
                 await pool.query(`
-                    INSERT INTO USERS (EMAIL, PASSWORD)
+                    INSERT INTO USERS (USER_ID, PASSWORD)
                     VALUES ($1, $2)`,
-                    [email, password]
+                    [user_id, password]
                 );
-
+        
                 // Optionally, you can send a success response back to the client
                 res.status(201).json({ message: "Signup successful" });
             } catch (error) {
@@ -82,6 +101,7 @@ async function run() {
                 res.status(500).send("Internal Server Error");
             }
         });
+        
 
         app.get("/error", (req, res) => {
             res.render("error");
@@ -238,6 +258,39 @@ async function run() {
     } catch (error) {
         console.error('Error executing query:', error);
         res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.get('/grade', async (req, res) => {
+    try {
+        const sql = `
+        SELECT 
+            S.STUDENT_ID AS ID,
+            S.NAME AS STUDENT_NAME,
+            G.TERM_WISE_RESULT AS RECENT_TERM_CGPA,
+            G.TOTAL_RESULT AS OVERALL_CGPA,
+            CASE
+                WHEN G.TOTAL_RESULT >= 4.0 THEN 'A+'
+                WHEN G.TOTAL_RESULT >= 3.75 THEN 'A'
+                WHEN G.TOTAL_RESULT >= 3.5 THEN 'A-'
+                WHEN G.TOTAL_RESULT >= 3.25 THEN 'B+'
+                WHEN G.TOTAL_RESULT >= 3.0 THEN 'B'
+                WHEN G.TOTAL_RESULT >= 2.75 THEN 'B-'
+                WHEN G.TOTAL_RESULT >= 2.5 THEN 'C+'
+                WHEN G.TOTAL_RESULT >= 2.25 THEN 'C'
+                WHEN G.TOTAL_RESULT >= 2.00 THEN 'D'
+                ELSE 'F'
+            END AS GRADES
+        FROM 
+            STUDENT S 
+        JOIN 
+            GRADE G ON S.STUDENT_ID = G.STUDENT_ID;
+        `;
+        const result = await pool.query(sql);
+        res.json(result.rows);
+    } catch (error) {
+        console.error(`PostgreSQL Error: ${error.message}`);
+        res.status(500).json({ error: "Internal Server Error" });
     }
 });
 

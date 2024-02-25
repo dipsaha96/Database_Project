@@ -1,0 +1,44 @@
+/* User Home Page Styles */
+
+.left-menu {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.left-menu-header {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.left-menu-header h2 {
+    margin: 0;
+    font-size: 20px;
+    color: #333;
+}
+
+.left-menu-items {
+    list-style: none;
+    padding: 0;
+}
+
+.left-menu-items li {
+    margin-bottom: 10px;
+}
+
+.left-menu-items li a {
+    text-decoration: none;
+    color: #555;
+    display: block;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.left-menu-items li a:hover {
+    background-color: #007bff;
+    color: #fff;
+}
