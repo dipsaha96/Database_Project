@@ -66,10 +66,6 @@ VALUES
 (2105052, 'Samina', 'Comilla, Bangladesh', '555-1052', '2000-02-19', 2, 1, 'samina@example.com', '123456838', 5),
 (2105053, 'Rafiq', 'Coxs Bazar, Bangladesh', '555-1053', '2000-02-20', 2, 1, 'rafiq@example.com', '123456839', 5),
 (2105054, 'Sohagi', 'Dhaka, Bangladesh', '555-1054', '2000-02-21', 2, 1, 'sohagi@example.com', '123456840', 5),
-
--- 10 data for student id between 2005001 to 2005010, level 3, term 1, department id 5
-INSERT INTO students (student_id, name, address, phone_number, birth_date, level, term, email, guardian_phone, department_id)
-VALUES
 (2005001, 'Sakib', 'Dhaka, Bangladesh', '555-1001', '2000-05-15', 3, 1, 'sakib@example.com', '123456780', 5),
 (2005002, 'Tasnim', 'Chittagong, Bangladesh', '555-1002', '1999-07-20', 3, 1, 'tasnim@example.com', '123456781', 5),
 (2005003, 'Aarif', 'Khulna, Bangladesh', '555-1003', '1998-10-25', 3, 1, 'aarif@example.com', '123456782', 5),
@@ -145,9 +141,6 @@ VALUES
 (1903009, 'Hasan', 'Comilla, Bangladesh', '555-3409', '2000-09-09', 4, 1, 'hasan1@example.com', '123456738', 3),
 (1903010, 'Sultana', 'Jessore, Bangladesh', '555-3410', '2000-10-10', 4, 1, 'sultana2@example.com', '123456739', 3),
 
--- Insert data for level 1, term 1, department 2
-INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id)
-VALUES
 (2204001, 'Rahim', 'Dhaka, Bangladesh', '555-4101', '2003-01-01', 1, 1, 'rahim1@example.com', '123456740', 4),
 (2204002, 'Sumaiya', 'Chittagong, Bangladesh', '555-4102', '2003-02-02', 1, 1, 'sumaiya1@example.com', '123456741', 4),
 (2204003, 'Kabir', 'Khulna, Bangladesh', '555-4103', '2003-03-03', 1, 1, 'kabir1@example.com', '123456742', 4),
@@ -308,10 +301,6 @@ VALUES
 (1907008, 'Nadia', 'Dinajpur, Bangladesh', '555-7708', '2000-01-08', 4, 1, 'nadia7@example.com', '123456708', 7),
 (1907009, 'Parvez', 'Comilla, Bangladesh', '555-7709', '2000-01-09', 4, 1, 'parvez7@example.com', '123456709', 7),
 (1907010, 'Shila', 'Jessore, Bangladesh', '555-7710', '2000-01-10', 4, 1, 'shila7@example.com', '123456710', 7),
-
--- Department ID 1, Level 1, Term 1
-INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id)
-VALUES
 (2201001, 'Abdul Rahman', 'Dhaka', '555-1001', '2000-01-01', 1, 1, 'abdul.rahman@example.com', '12345678', 1),
 (2201002, 'Farida Karim', 'Dhaka', '555-1002', '2000-02-02', 1, 1, 'farida.karim@example.com', '23456789', 1),
 (2201003, 'Rahim Ahmed', 'Dhaka', '555-1003', '1999-03-03', 1, 1, 'rahim.ahmed@example.com', '34567890', 1),
@@ -322,11 +311,6 @@ VALUES
 (2201008, 'Abdul Karim', 'Dhaka', '555-1008', '1997-08-08', 1, 1, 'abdul.karim@example.com', '89012345', 1),
 (2201009, 'Farid Mia', 'Dhaka', '555-1009', '1996-09-09', 1, 1, 'farid.mia@example.com', '90123456', 1),
 (2201010, 'Nazmin Akhtar', 'Dhaka', '555-1010', '1996-10-10', 1, 1, 'nazmin.akhtar@example.com', '01234567', 1),
-
-
-
-INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id)
-VALUES
 (2101001, 'Samiul Rahman', 'Dhaka', '555-2001', '1999-01-01', 2, 1, 'samiul.rahman@example.com', '12345678', 1),
 (2101002, 'Nusrat Karim', 'Dhaka', '555-2002', '1999-02-02', 2, 1, 'nusrat.karim@example.com', '23456789', 1),
 (2101003, 'Kamran Ahmed', 'Dhaka', '555-2003', '1998-03-03', 2, 1, 'kamran.ahmed@example.com', '34567890', 1),
@@ -337,10 +321,6 @@ VALUES
 (2101008, 'Sumaiya Ahmed', 'Dhaka', '555-2008', '1996-08-08', 2, 1, 'sumaiya.ahmed@example.com', '89012345', 1),
 (2101009, 'Sohel Rahman', 'Dhaka', '555-2009', '1995-09-09', 2, 1, 'sohel.rahman@example.com', '90123456', 1),
 (2101010, 'Maliha Karim', 'Dhaka', '555-2010', '1995-10-10', 2, 1, 'maliha.karim@example.com', '12345098', 1),
-
-
-INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id)
-VALUES
 (2001001, 'Sadia Ahmed', 'Dhaka', '555-3001', '1998-01-01', 3, 1, 'sadia.ahmed@example.com', '23456789', 1),
 (2001002, 'Zahir Begum', 'Dhaka', '555-3002', '1998-02-02', 3, 1, 'zahir.begum@example.com', '34567890', 1),
 (2001003, 'Kamal Hossen', 'Dhaka', '555-3003', '1997-03-03', 3, 1, 'kamal.hossen@example.com', '45678901', 1),
@@ -351,8 +331,6 @@ VALUES
 (2001008, 'Maliha Karim', 'Dhaka', '555-3008', '1995-08-08', 3, 1, 'maliha.karim@example.com', '90123456', 1),
 (2001009, 'Amin Hossen', 'Dhaka', '555-3009', '1994-09-09', 3, 1, 'amin.hossen@example.com', '12345098', 1),
 (2001010, 'Farida Rahman', 'Dhaka', '555-3010', '1994-10-10', 3, 1, 'farida.rahman@example.com', '23456789', 1),
-INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id)
-VALUES
 (1901001, 'Kamran Ahmed', 'Dhaka', '555-4001', '1997-01-01', 4, 1, 'kamran.ahmed@example.com', '34567890', 1),
 (1901002, 'Farida Begum', 'Dhaka', '555-4002', '1997-02-02', 4, 1, 'farida.begum@example.com', '45678901', 1),
 (1901003, 'Rahim Hossen', 'Dhaka', '555-4003', '1996-03-03', 4, 1, 'rahim.hossen@example.com', '56789012', 1),
@@ -363,13 +341,6 @@ VALUES
 (1901008, 'Maliha Karim', 'Dhaka', '555-4008', '1994-08-08', 4, 1, 'maliha.karim@example.com', '12345098', 1),
 (1901009, 'Sadia Ahmed', 'Dhaka', '555-4009', '1993-09-09', 4, 1, 'sadia.ahmed@example.com', '23456789', 1),
 (1901010, 'Zahir Begum', 'Dhaka', '555-4010', '1993-10-10', 4, 1, 'zahir.begum@example.com', '34567890', 1),
-
-
-
-
-
-INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id)
-VALUES
 (2202001, 'Rahimul Hasan', 'Dhaka', '555-2001', '2000-01-01', 1, 1, 'rahimul.hasan@example.com', '12345678', 2),
 (2202002, 'Farida Karim', 'Dhaka', '555-2002', '2000-02-02', 1, 1, 'farida.karim@example.com', '23456789', 2),
 (2202003, 'Kamran Ahmed', 'Dhaka', '555-2003', '1999-03-03', 1, 1, 'kamran.ahmed@example.com', '34567890', 2),

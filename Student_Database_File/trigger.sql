@@ -32,11 +32,10 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_teacher
+CREATE OR REPLACE TRIGGER before_insert_teacher
 BEFORE INSERT ON teacher
 FOR EACH ROW
-EXECUTE FUNCTION uppercase_student_data();
-
+EXECUTE FUNCTION uppercase_teacher_data();
 
 -- Create the trigger function to convert data to uppercase characters for the course table
 CREATE OR REPLACE FUNCTION uppercase_course_data()
