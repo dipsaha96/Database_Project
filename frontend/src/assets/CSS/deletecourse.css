@@ -1,0 +1,19 @@
+.delete-course-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.delete-course-container h1 {
+    margin-bottom: 20px;
+}
+
+.delete-course-container form {
+    max-width: 400px;
+    margin: auto;
+}
+
+.delete-course-container .form-group {
+    margin-bottom: 20px;
+}

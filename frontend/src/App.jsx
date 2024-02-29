@@ -26,6 +26,8 @@ import AddDepartment from './pages/AddDepartment';
 import AddTeacher from './pages/AddTeacher';
 import AddCourse from './pages/AddCourse';
 import DeleteStudent from './pages/DeleteStudent';
+import DeleteCourse from './pages/DeleteCourse';
+import DeleteTeacher from './pages/DeleteTeacher';
 
 
 export default function App() {
@@ -53,6 +55,8 @@ export default function App() {
         <Route path="/addteacher" element={<AddTeacher></AddTeacher>} />
         <Route path="/addcourse" element={<AddCourse></AddCourse>} />
         <Route path="/deletestudent" element={<DeleteStudent></DeleteStudent>} />
+        <Route path="/deleteteacher" element={<DeleteTeacher></DeleteTeacher>} />
+        <Route path="/deletecourse" element={<DeleteCourse></DeleteCourse>} />
 
       </Route>
     )

@@ -384,6 +384,38 @@ async function run() {
             }
         });
 
+        app.post('/deleteteacher', async (req, res) => {
+            const  teacherId  = req.body.teacherId;
+            try {
+                console.log(teacherId);
+                const result = await pool.query('DELETE FROM teacher WHERE teacher_id = $1', [teacherId]);
+                if (result.rowCount === 0) {
+                    res.status(404).json({ error: 'Teacher not found' });
+                } else {
+                    res.status(200).json({ message: 'Teacher deleted successfully!' });
+                }
+            } catch (error) {
+                console.error('Error deleting teacher', error);
+                res.status(500).json({ error: 'Failed to delete teacher' });
+            }
+        });
+
+        app.post('/deletecourse', async (req, res) => {
+            const courseId = req.body.courseId;
+            try {
+                console.log(courseId);
+                const result = await pool.query('DELETE FROM course WHERE course_id = $1', [courseId]);
+                if (result.rowCount === 0) {
+                    res.status(404).json({ error: 'Course not found' });
+                } else {
+                    res.status(200).json({ message: 'Course deleted successfully!' });
+                }
+            } catch (error) {
+                console.error('Error deleting course', error);
+                res.status(500).json({ error: 'Failed to delete course' });
+            }
+        });
+
           app.post('/addteacher', async (req, res) => {
             const { teacherId, phoneNumber, email, address, name, departmentId } = req.body;
             try {
