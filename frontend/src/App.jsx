@@ -21,6 +21,11 @@ import Grade from './pages/Grade';
 import Rank from './components/Rank';
 import Header from './components/Nav/Header';
 import UserHomePage from './pages/UserHomePage';
+import AddStudent from './pages/AddStudent';
+import AddDepartment from './pages/AddDepartment';
+import AddTeacher from './pages/AddTeacher';
+import AddCourse from './pages/AddCourse';
+import DeleteStudent from './pages/DeleteStudent';
 
 
 export default function App() {
@@ -43,6 +48,11 @@ export default function App() {
         <Route path='/grades' element={<Grade></Grade>} />
         <Route path="/students/:studentId" element={<StudentInformation></StudentInformation>} />
         <Route path="/userhomepage" element={<UserHomePage></UserHomePage>} />
+        <Route path="/addstudent" element={<AddStudent></AddStudent>} />
+        <Route path="/adddepartment" element={<AddDepartment></AddDepartment>} />
+        <Route path="/addteacher" element={<AddTeacher></AddTeacher>} />
+        <Route path="/addcourse" element={<AddCourse></AddCourse>} />
+        <Route path="/deletestudent" element={<DeleteStudent></DeleteStudent>} />
 
       </Route>
     )
@@ -91,3 +101,4 @@ function Root() {
 //     </p>
 //   </>
 // )
+ 

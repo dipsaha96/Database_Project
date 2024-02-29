@@ -1,0 +1,53 @@
+/* courseForm.css */
+.course-form-container {
+    width: 50%;
+    margin: auto;
+  }
+  
+  .course-form-container form {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .course-form-container h1 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .course-form-container .form-group {
+    margin-bottom: 20px;
+  }
+  
+  .course-form-container label {
+    font-weight: bold;
+  }
+  
+  .course-form-container input[type="text"],
+  .course-form-container input[type="number"],
+  .course-form-container input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .course-form-container input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+  
+  .course-form-container input[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
+  .course-form-container .alert {
+    margin-bottom: 20px;
+  }
+  

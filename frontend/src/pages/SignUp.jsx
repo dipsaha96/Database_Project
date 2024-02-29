@@ -46,7 +46,7 @@ export default function SignUp() {
                         </span>
                         <input
                             className="form-input"
-                            type="text"
+                            type="number"
                             placeholder="User ID"
                             value={user_id}
                             onChange={(e) => setUserId(e.target.value)}

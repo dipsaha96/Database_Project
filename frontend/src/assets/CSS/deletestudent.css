@@ -1,0 +1,26 @@
+/* Add your CSS styles for the Delete Student component here */
+.delete-student-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.delete-student-container h1 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.delete-student-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.delete-student-container .mb-3 {
+    margin-bottom: 15px;
+}
+
+.delete-student-container button[type="submit"] {
+    align-self: center;
+}

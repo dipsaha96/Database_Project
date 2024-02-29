@@ -1,0 +1,25 @@
+.teacher-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.teacher-form-container h1 {
+    margin-bottom: 20px;
+}
+
+.teacher-form-container form {
+    margin-bottom: 20px;
+}
+
+.teacher-form-container .form-group {
+    margin-bottom: 20px;
+}
+
+.teacher-form-container .btn-primary {
+    width: 100%;
+}
+    
