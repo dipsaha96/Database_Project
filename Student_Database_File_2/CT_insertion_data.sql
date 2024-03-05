@@ -625,3 +625,14 @@ VALUES
 (340511, 'Bridge Evaluation and Inspection Report', '2025-08-05', '9:00', '10:30'),
 (340512, 'Advanced Bridge Design Project', '2025-08-20', '9:00', '10:30'),
 
+INSERT INTO CT (CT_ID,CT_TITLE,EXAM_DATE, START_TIME, ENDING_TIME)
+VALUES
+(520111,'Introduction of data structures exam', '2024-03-01', '9:00', '10:30'),
+(520112,'Dynamic programming exam','2024-05-01', '9:00', '10:30'),
+(530111,'Introduction of java exam', '2024-03-01', '9:00', '10:30'),
+(530112,'Inheritance exam','2024-05-01', '9:00', '10:30');
+
+
+
+
+

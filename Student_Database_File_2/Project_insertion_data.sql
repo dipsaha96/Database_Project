@@ -647,5 +647,14 @@
 (340521, 'Bridge Evaluation and Inspection Project Report', '2025-08-15'),
 (340522, 'Advanced Bridge Design Project', '2025-08-30');
 
+INSERT INTO PROJECT (PROJECT_ID, PROJECT_TITLE, SUBMISSION_DATE)
+ VALUES
+
+ (520121, 'Data structure Final Project', '2024-09-15'),
+
+-- Projects for Course ID 5204
+(530121, 'Java UI Prototyping Project', '2024-10-01');
+
+
 
 

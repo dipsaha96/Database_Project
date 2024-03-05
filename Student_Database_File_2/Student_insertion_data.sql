@@ -5,7 +5,7 @@ VALUES
 (2105129, 'Roki', '789 Pine St, Villagetown', '555-9876', '1995-03-10', 2, 1, 'roki@example.com', '5678901234', 5),
 (2105138, 'Dip', '101 Cedar St, Hamletville', '555-4321', '1998-11-25', 2, 1, 'dip@example.com', '9876543210', 5),
 (2105017, 'Gourove', '202 Maple St, Riverside', '555-8765', '1994-07-05', 2, 1, 'gourove@example.com', '3456789012', 5),
-(2101001, 'Anjan', '303 Elm St, Hilltop', '555-2345', '1997-01-30', 2, 1, 'anjan@example.com', '6789012345', 1),
+--(2101001, 'Anjan', '303 Elm St, Hilltop', '555-2345', '1997-01-30', 2, 1, 'anjan@example.com', '6789012345', 1),
 (2001032, 'Adi', '404 Birch St, Lakeside', '555-7890', '1993-09-12', 3, 1, 'adi@example.com', '8901234567', 1),
 (2002064, 'Shoibal', '505 Cedar St, Mountainside', '555-3456', '1996-04-20', 3, 1, 'shoibal@example.com', '0123456789', 2),
 (1808032, 'Sakib', '606 Pine St, Seaside', '555-0123', '1999-12-05', 4, 2, 'sakib@example.com', '3210987654', 8),

@@ -663,6 +663,10 @@ VALUES
 (340501, 'Bridge Evaluation and Inspection Report', '2025-08-05'),
 (340502, 'Advanced Bridge Design Assignment', '2025-08-20');
 
+INSERT INTO ASSIGNMENT (ASSIGNMENT_ID, ASSIGNMENT_TITLE, SUBMISSION_DATE)
+VALUES
+(520101, 'DATA Design Assignment - User Interface Prototyping', '2024-08-01'),
+(520102, 'DATA Architecture Case Study', '2024-08-15')
 
-select *
-from assignment
+(530101, 'JAVA Programming Challenge', '2024-06-01'),
+(530102, 'javal Language Processing Assignment', '2024-06-15');

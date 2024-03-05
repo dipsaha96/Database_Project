@@ -129,7 +129,7 @@ EXECUTE FUNCTION uppercase_ct_data();
 CREATE OR REPLACE FUNCTION uppercase_term_final_data()
 RETURNS TRIGGER AS $$
 BEGIN
-    NEW.time_duaration := UPPER(NEW.time_duration);
+    NEW.time_duration := UPPER(NEW.time_duration);
     -- Add other fields here if needed
     RETURN NEW;
 END;
