@@ -1,7 +1,4 @@
-// import { useState } from "react";
-// import reactLogo from "./assets/react.svg";
-// import viteLogo from "/vite.svg";
-// import "./App.css";
+
 
 import { RouterProvider } from 'react-router-dom';
 import { Route, createBrowserRouter, createRoutesFromElements, Outlet } from 'react-router-dom';
@@ -28,6 +25,8 @@ import AddCourse from './pages/AddCourse';
 import DeleteStudent from './pages/DeleteStudent';
 import DeleteCourse from './pages/DeleteCourse';
 import DeleteTeacher from './pages/DeleteTeacher';
+import Footer from './components/Nav/Footer';
+import StudentDetails from './pages/StudentDetails';
 
 
 export default function App() {
@@ -57,6 +56,8 @@ export default function App() {
         <Route path="/deletestudent" element={<DeleteStudent></DeleteStudent>} />
         <Route path="/deleteteacher" element={<DeleteTeacher></DeleteTeacher>} />
         <Route path="/deletecourse" element={<DeleteCourse></DeleteCourse>} />
+        <Route path="/studentdetails" element={<StudentDetails></StudentDetails>} />
+
 
       </Route>
     )
@@ -75,6 +76,7 @@ function Root() {
       <div>
         <Header></Header>
         <Outlet></Outlet>
+        {/*<Footer></Footer>*/}
       </div>
     </>
   )

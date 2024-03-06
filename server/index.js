@@ -163,17 +163,57 @@ async function run() {
             }
         });
 
+        // app.get("/student", async (req, res) => {
+        //     try {
+        //         const sql = `
+        //         SELECT STUDENT_ID AS STUDENT_ID,
+        //         NAME AS FULL_NAME,
+        //         EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM P.DATE_OF_BIRTH) AS AGE,
+        //         ADDRESS AS ADDRESS,
+        //         LEVEL AS LEVEL,
+        //         TERM AS TERM
+        //         FROM STUDENT P;
+        //         `;
+        //         const result = await pool.query(sql);
+        //         res.json(result.rows);
+        //     } catch (error) {
+        //         console.error(`PostgreSQL Error: ${error.message}`);
+        //         res.status(500).json({ error: "Internal Server Error" });
+        //     }
+        // });
+
         app.get("/student", async (req, res) => {
             try {
-                const sql = `
-                SELECT STUDENT_ID AS STUDENT_ID,
-                NAME AS FULL_NAME,
-                EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM P.DATE_OF_BIRTH) AS AGE,
-                ADDRESS AS ADDRESS,
-                LEVEL AS LEVEL,
-                TERM AS TERM
-                FROM STUDENT P;
+                let sql = `
+                    SELECT STUDENT_ID AS student_id,
+                    NAME AS full_name,
+                    EXTRACT(YEAR FROM CURRENT_DATE) - EXTRACT(YEAR FROM P.DATE_OF_BIRTH) AS age,
+                    ADDRESS AS address,
+                    LEVEL AS level,
+                    TERM AS term
+                    FROM STUDENT P
                 `;
+                
+                const { student_id,level, term, department_id } = req.query;
+                let conditions = [];
+                
+                if (level) {
+                    conditions.push(`LEVEL = '${level}'`);
+                }
+                if (term) {
+                    conditions.push(`TERM = ${parseInt(term)}`);
+                }
+                if (department_id) {
+                    conditions.push(`DEPARTMENT_ID = ${parseInt(department_id)}`);
+                }
+                if (student_id) {
+                    conditions.push(`STUDENT_ID = '${student_id}'`);
+                }
+                
+                if (conditions.length > 0) {
+                    sql += ` WHERE ${conditions.join(" AND ")}`;
+                }
+                
                 const result = await pool.query(sql);
                 res.json(result.rows);
             } catch (error) {
@@ -181,6 +221,9 @@ async function run() {
                 res.status(500).json({ error: "Internal Server Error" });
             }
         });
+        
+        
+        
 
         app.get("/teacher", async (req, res) => {
             try {
