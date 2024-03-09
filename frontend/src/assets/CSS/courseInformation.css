@@ -1,0 +1,90 @@
+.course-information-container {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.course-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.course-details,
+.assignment,
+.project,
+.ct,
+.term-final {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.course-details h2,
+.assignment h2,
+.project h2,
+.ct h2,
+.term-final h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.course-details p,
+.assignment p,
+.project p,
+.ct p,
+.term-final p {
+    margin: 0.5em 0;
+    font-size: 1.2rem;
+}
+
+.course-details {
+    background-color: #fff;
+}
+
+.assignment {
+    background-color: #f0f5ff;
+}
+
+.project {
+    background-color: #f9f9f9;
+}
+
+.ct {
+    background-color: #fff;
+}
+
+.term-final {
+    background-color: #f0f5ff;
+}
+.course-coordinator {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button:hover {
+    background-color: #45a049;
+}

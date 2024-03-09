@@ -1,25 +1,4 @@
--- INSERT INTO PROJECT (PROJECT_ID, COURSE_ID, STUDENT_ID, TEACHER_ID, PROJECT_MARK_WEIGHT)
--- VALUES
--- (1, 5101, 2105001, 1001, 15),
--- (2, 6101, 2105002, 1002, 20),
--- (3, 7101, 2105129, 1003, 18),
--- (4, 2101, 2105138, 1004, 25),
--- (5, 4101, 2105017, 2001, 22),
--- (6, 5102, 2101001, 2002, 24),
--- (7, 7102, 2001032, 2003, 20),
--- (8, 1101, 2002064, 2004, 18),
--- (9, 8101, 1808032, 3001, 21),
--- (10, 5304, 1906032, 3002, 17),
--- (11, 5201, 2204032, 3003, 23),
--- (12, 6201, 2106136, 3004, 19),
--- (13, 7201, 1901023, 4001, 20),
--- (14, 2201, 2107078, 4002, 22),
--- (15, 3101, 1808065, 4003, 19),
--- (16, 5103, 1906032, 4004, 21),
--- (17, 5301, 1808065, 6001, 25),
--- (18, 6202, 1906032, 6002, 24),
--- (19, 1201, 2204032, 6003, 18),
--- (20, 8201, 2106136, 6004, 23),
+
  INSERT INTO PROJECT (PROJECT_ID, PROJECT_TITLE, SUBMISSION_DATE)
  VALUES
 -- Projects for Course ID 5104
@@ -648,13 +627,57 @@
 (340522, 'Advanced Bridge Design Project', '2025-08-30');
 
 INSERT INTO PROJECT (PROJECT_ID, PROJECT_TITLE, SUBMISSION_DATE)
- VALUES
+VALUES
 
- (520121, 'Data structure Final Project', '2024-09-15'),
+ --(520121, 'Data structure Final Project', '2024-09-15'),
 
 -- Projects for Course ID 5204
-(530121, 'Java UI Prototyping Project', '2024-10-01');
+--530121, 'Java UI Prototyping Project', '2024-10-01'),
+
+
+
+(510421, 'Advanced Algorithms implementation project ', '2024-12-01'),
+(510521, 'Database Management Systems project ', '2024-10-03'),
+
+(510422, 'Advanced Algorithms problem solving ', '2024-02-01'),
+(510522, 'Database Management Systems final project ', '2024-03-04'),
 
 
 
 
+(520521, 'User Interface Design project ', '2024-10-03'),
+(520522, 'User Interface Design analysis project ', '2024-08-05'),
+
+
+
+--(530121, 'Programming in Java project ', '2025-01-01'),
+(530122, 'Programming in Java final project', '2025-05-01'),
+
+(530421 , 'computer architechture project ', '2024-05-01'),
+(530422, 'Introduction to computer architechture final project ', '2024-10-01'),
+
+
+
+
+(530521, 'Artificial Intelligence Fundamentals project', '2024-05-01'),
+(530522, 'Artificial Intelligence Fundamentals final ', '2024-05-01'),
+(540521, 'Usability Testing and Evaluation project ', '2024-05-10'),
+(540522, 'Usability Testing and Evaluation final project', '2024-10-10'),
+
+
+
+
+(620121, 'Digital Electronics Analysis project', '2024-05-04'),
+(620122, 'Digital Electronics final project', '2024-12-01'),
+
+
+(620221, 'Electronic Circuits analysis project', '2025-05-01'),
+(620222, 'Electronic Circuits final project', '2025-06-01'),
+
+
+
+(630121, 'Advanced Digital Signal Processing analysis project ', '2024-05-15'),
+(630122, 'Advanced Digital Signal Processing final project', '2024-03-15'),
+
+(640121, 'Digital Signal Processing Applications analysis project', '2024-05-01'),
+(640122, 'Digital Signal Processing Applications final project', '2024-04-01');

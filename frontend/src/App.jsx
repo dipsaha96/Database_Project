@@ -1,21 +1,21 @@
-
+import { useContext } from 'react';
 
 import { RouterProvider } from 'react-router-dom';
 import { Route, createBrowserRouter, createRoutesFromElements, Outlet } from 'react-router-dom';
 
 import Home from './pages/Home';
 import SignUp from './pages/SignUp';
+import Login from './pages/Login';
 import Admin from './pages/Admin';
-import Combo from './pages/Combo';
 import Teamdetails from './pages/Teamdetails';
 import Student from './pages/Student';
 import Teacher from './pages/Teacher';
 import Course from './pages/Course';
 import Department from './pages/Department';
 import StudentInformation from './pages/StudentInformation';
+import CourseInformation from './pages/CourseInformation';
 import Relation from './pages/Relation';
 import Grade from './pages/Grade';
-import Rank from './components/Rank';
 import Header from './components/Nav/Header';
 import UserHomePage from './pages/UserHomePage';
 import AddStudent from './pages/AddStudent';
@@ -26,8 +26,12 @@ import DeleteStudent from './pages/DeleteStudent';
 import DeleteCourse from './pages/DeleteCourse';
 import DeleteTeacher from './pages/DeleteTeacher';
 import Footer from './components/Nav/Footer';
+import Combo from './pages/Combo';
 import StudentDetails from './pages/StudentDetails';
-
+import UpdateStudent from './pages/UpdateStudent';
+import UpdateCourse from './pages/UpdateCourse';
+import AddLecture from './pages/AddLecture';
+import UserViewCourse from './pages/UserViewCourse';
 
 export default function App() {
   const router = createBrowserRouter(
@@ -38,9 +42,7 @@ export default function App() {
         <Route path="/login" element={<Combo></Combo>} />
         <Route path="/signup" element={<SignUp></SignUp>} />
         <Route path="/admin" element={<Admin></Admin>} />
-        <Route path="/rank" element={<Rank></Rank>} />
         <Route path="/teams/:team_id" element={<Teamdetails></Teamdetails>} />
-        <Route path='/combo' element={<Combo></Combo>} />
         <Route path='/students' element={<Student></Student>} />
         <Route path='/teachers' element={<Teacher></Teacher>} />
         <Route path='/courses' element={<Course></Course>} />
@@ -57,6 +59,11 @@ export default function App() {
         <Route path="/deleteteacher" element={<DeleteTeacher></DeleteTeacher>} />
         <Route path="/deletecourse" element={<DeleteCourse></DeleteCourse>} />
         <Route path="/studentdetails" element={<StudentDetails></StudentDetails>} />
+        <Route path="/courses/:courseId" element={<CourseInformation></CourseInformation>} />
+        <Route path="/updatestudent" element={<UpdateStudent></UpdateStudent>} />
+        <Route path="/updatecourse" element={<UpdateCourse></UpdateCourse>} />
+        <Route path="/addlecture" element={<AddLecture></AddLecture>} />
+        <Route path="/viewcourse/:userId" element={<UserViewCourse></UserViewCourse>} />
 
 
       </Route>
@@ -107,4 +114,3 @@ function Root() {
 //     </p>
 //   </>
 // )
- 

@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom'; // Add this line to import useParams
+import axios from 'axios';
 import '../assets/CSS/course.css';
+import UserHomePage from '../pages/UserHomePage';
+import { Link } from 'react-router-dom';
 
 function Course() {
+    const { userId } = useParams(); // Access route parameter userId using useParams
     const [courses, setCourses] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:8000/course")
-            .then((response) => response.json())
-            .then((data) => setCourses(data))
-            .catch((error) => console.error(error));
-    }, []);
-
-    const handleViewInformation = (courseId) => {
-        // Log the course ID in the console
-        console.log("Course ID:", courseId);
-    };
-
+        axios.get(`http://localhost:8000/viewcourse/${userId}`)
+            .then((response) => {                
+                setCourses(response.data);
+            })  
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [userId]); // Include userId in the dependency array
 
     return (
         <div className="course-container">
+            <UserHomePage></UserHomePage>
             <h1 className="course-heading">ALL COURSES</h1>
             <div className="course-table-container">
                 <table className="course-table">
@@ -42,8 +44,8 @@ function Course() {
                                 <td>{course.total_lectures}</td>
                                 <td>{course.credit}</td>
                                 <td className="actions-column">
-                                    <Link to={`/courses/${course.course_id}`} className="view-link">
-                                        <button className="view-button" onClick={() => handleViewInformation(course.course_id)}>Course Details</button>
+                                    <Link to={`/CT/${course.course_id}`} className="view-link">
+                                        <button className="view-button" onClick={() => handleViewInformation(course.course_id)}>CT Details</button>
                                     </Link>
                                 </td>
                             </tr>
@@ -51,7 +53,6 @@ function Course() {
                     </tbody>
                 </table>
             </div>
-            <Link to="/available-courses" className="check-courses-button">Check Your Available Courses</Link>
         </div>
     );
 }

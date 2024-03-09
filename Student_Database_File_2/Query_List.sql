@@ -167,7 +167,7 @@ SELECT
             GRADE G ON S.STUDENT_ID = G.STUDENT_ID;
 	--Course details
 select
-C.COURSE_ID
+C.COURSE_ID,
 c.course_title,
 a.assignment_title as asignment1_title,
 a.submission_date as asignment1_submission_date,
@@ -178,16 +178,14 @@ p.submission_date as project_submission_date,
 ct1.ct_title as ct1_title,
 ct1.exam_date as ct1_exam_date,
 ct1.START_TIME as ct1_start_time,
-ct1.END_TIME as ct1_end_time,
+ct1.ENDING_TIME as ct1_end_time,
 ct2.ct_title as ct2_title,
 ct2.exam_date as ct2_exam_date,
 ct2.START_TIME as ct2_start_time,
-ct2.END_TIME as ct2_end_time,
+ct2.ENDING_TIME as ct2_end_time,
 T.exam_date as term_final_exam_date,
 T.START_TIME as term_final_start_time,
-T.time_duration as term_final_time
-
-
+T.time_duration as term_final_time_duration
 from student_all s
 JOIN course c ON s.course_id = c.course_id
 JOIN assignment a ON s.assignment1_id = a.assignment_id
@@ -195,12 +193,36 @@ JOIN assignment b ON s.assignment2_id = b.assignment_id
 JOIN project p ON s.project_id = p.project_id
 JOIN ct ct1 ON s.ct1_id = ct1.ct_id
 JOIN ct ct2 ON s.ct2_id = ct2.ct_id
-JOIN TERM_FINAL T ON T.TERM_FINAL_id = S.TERM_FINAL_id;
+JOIN TERM_FINAL T ON T.TERM_FINAL_id = S.TERM_FINAL_id
 WHERE C.COURSE_ID = 5201
 GROUP BY C.COURSE_ID,
 c.course_title,
-a.assignment_title, 
-b.assignment_title, 
+a.assignment_title,
+a.submission_date ,
+b.assignment_title ,
+b.submission_date,
 p.project_title,
+p.submission_date ,
 ct1.ct_title,
-ct2.ct_title;
+ct1.exam_date,
+ct1.START_TIME,
+ct1.ENDING_TIME,
+ct2.ct_title,
+ct2.exam_date,
+ct2.START_TIME,
+ct2.ENDING_TIME,
+T.exam_date,
+T.START_TIME,
+T.time_duration;
+
+--soft delete
+ALTER TABLE teacher
+ADD COLUMN is_deleted BOOLEAN DEFAULT false;
+UPDATE teacher
+SET is_deleted = false;
+DELETE FROM teacher
+ALTER TABLE teacher ADD COLUMN deleted_at TIMESTAMP;
+WHERE is_deleted = TRUE
+AND deleted_at < NOW() - INTERVAL '1 day';
+
+

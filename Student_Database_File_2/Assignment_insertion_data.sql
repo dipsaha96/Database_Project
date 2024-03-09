@@ -1,35 +1,4 @@
--- INSERT INTO ASSIGNMENT (ASSIGNMENT_ID, LECTURE_ID, TEACHER_ID, ASSIGNMENT_TITLE, SUBMISSION_DATE, MARK_WEIGHT, STUDENT_ID)
--- VALUES
--- (1, 1, 1001, 'Programming Assignment 1', '2024-03-01', 10, 2105001),
--- (2, 2, 1002, 'Circuit Design Assignment', '2024-03-05', 15, 2105002),
--- (3, 3, 1003, 'Mechanical Drawing Exercise', '2024-03-10', 12, 2105129),
--- (4, 4, 1004, 'Chemical Equations Quiz', '2024-03-15', 8, 2105138),
--- (5, 5, 2001, 'Civil Engineering Report', '2024-03-20', 14, 2105017),
--- (6, 6, 2002, 'Algorithm Implementation', '2024-03-25', 10, 2101001),
--- (7, 7, 2003, 'Physics Problem Set', '2024-03-30', 12, 2001032),
--- (8, 8, 2004, 'Biology Lab Report', '2024-04-02', 15, 2002064),
--- (9, 9, 3001, 'Financial Analysis Assignment', '2024-04-07', 18, 1808032),
--- (10, 10, 3002, 'Psychology Research Paper', '2024-04-12', 12, 1906032),
--- (11, 11, 3003, 'Data Structures Assignment', '2024-04-17', 14, 2204032),
--- (12, 12, 3004, 'Digital Electronics Assignment', '2024-04-22', 16, 2106136),
--- (13, 13, 4001, 'Thermodynamics Problem Set', '2024-04-27', 10, 1901023),
--- (14, 14, 4002, 'Organic Chemistry Lab Report', '2024-05-02', 15, 2107078),
--- (15, 15, 4003, 'Structural Analysis Assignment', '2024-05-07', 12, 1808065),
--- (16, 16, 4004, 'Differential Equations Assignment', '2024-05-12', 14, 2105017),
--- (17, 17, 6001, 'Java Programming Assignment', '2024-05-17', 10, 1808065),
--- (18, 18, 6002, 'Electronic Circuits Design', '2024-05-22', 15, 1906032),
--- (19, 19, 6003, 'Microeconomics Case Study', '2024-05-27', 18, 2204032),
--- (20, 20, 6004, 'Social Psychology Experiment', '2024-06-01', 12, 2106136),
--- (21, 21, 5001, 'Advanced Programming Assignment', '2024-06-06', 12, 1808065),
--- (22, 22, 5052, 'Advanced Circuit Design', '2024-06-11', 16, 1906032),
--- (23, 23, 8010, 'Advanced Mechanical Engineering Assignment', '2024-06-16', 20, 2204032),
--- (24, 24, 5003, 'Advanced Chemical Kinetics Analysis', '2024-06-21', 18, 2107078),
--- (25, 25,5004, 'Advanced Civil Engineering Design', '2024-06-26', 22, 1808065),
--- (26, 26, 5005, 'Advanced Algorithms Research', '2024-07-01', 14, 2105017),
--- (27, 27, 5006, 'Advanced Physics Theoretical Study', '2024-07-06', 16, 1808065),
--- (28, 28, 5007, 'Advanced Molecular Biology Analysis', '2024-07-11', 20, 1906032),
--- (29, 29, 5008, 'Advanced Financial Modeling Assignment', '2024-07-16', 24, 2204032),
--- (30, 30, 5009, 'Advanced Psychology Thesis', '2024-07-21', 18, 2106136);
+
 INSERT INTO ASSIGNMENT (ASSIGNMENT_ID, ASSIGNMENT_TITLE, SUBMISSION_DATE)
 VALUES
 -- Assignments for Course ID 5104
@@ -113,8 +82,8 @@ VALUES
 
 
 -- Assignments for Course ID 6207
-(620701, 'Advanced Power Electronics Assignment', '2024-08-01'),
-(620702, 'Power Electronics Midterm Exam', '2024-08-15'),
+(620101, 'Advanced Power Electronics Assignment', '2024-08-01'),
+(620102, 'Power Electronics Midterm Exam', '2024-08-15'),
 
 -- Assignments for Course ID 6203
 (620301, 'Electric Machines Lab - Simulation Assignment', '2024-09-01'),
@@ -129,8 +98,8 @@ VALUES
 (620502, 'Digital Signal Processing in Electronics Assignment', '2024-11-15'),
 
 -- Assignments for Course ID 6206
-(620601, 'Microelectronics Lab - Integrated Circuit Design', '2024-12-01'),
-(620602, 'High-Frequency Electronics Assignment', '2024-12-15'),
+(620201, 'Microelectronics Lab - Integrated Circuit Design', '2024-12-01'),
+(620202, 'High-Frequency Electronics Assignment', '2024-12-15'),
 
 -- Assignments for Course ID 6302
 (630201, 'Power System Protection Assignment', '2024-02-15'),
@@ -370,7 +339,7 @@ VALUES
 
 -- Assignments for Course ID 4105
 (410401, 'Construction Assignment Management Plan', '2024-09-05'),
-(410402,  Assignment Scheduling and Cost Estimation Assignment', '2024-09-20'),
+(410402,  'Assignment Scheduling and Cost Estimation Assignment', '2024-09-20'),
 
 -- Assignments for Course ID 4106
 (410501, 'Environmental Impact Assessment Report', '2024-10-01'),
@@ -525,12 +494,6 @@ VALUES
 (840502, 'Financial Planning for Startups', '2025-02-28');
 
 
-
-
-
-
-
-
 INSERT INTO ASSIGNMENT (ASSIGNMENT_ID, ASSIGNMENT_TITLE, SUBMISSION_DATE)
 VALUES
 -- Sketching Techniques
@@ -665,8 +628,60 @@ VALUES
 
 INSERT INTO ASSIGNMENT (ASSIGNMENT_ID, ASSIGNMENT_TITLE, SUBMISSION_DATE)
 VALUES
-(520101, 'DATA Design Assignment - User Interface Prototyping', '2024-08-01'),
-(520102, 'DATA Architecture Case Study', '2024-08-15')
+-- (520101, 'DATA Design Assignment - User Interface Prototyping', '2024-08-01'),
+-- (520102, 'DATA Architecture Case Study', '2024-08-15')
 
-(530101, 'JAVA Programming Challenge', '2024-06-01'),
-(530102, 'javal Language Processing Assignment', '2024-06-15');
+--(530101, 'JAVA Programming Challenge', '2024-06-01'),
+--(530102, 'javal Language Processing Assignment', '2024-06-15');
+
+
+(510401, 'Advanced Algorithms Group assignment ', '2024-02-01'),
+
+(510402, 'Advanced Algorithms Analysis', '2024-02-01'),
+
+
+
+(510501, 'Database Management Systems Group assignment', '2024-03-15'),
+(510502, 'Database Management Systems Analysis', '2024-03-15'),
+
+(520101, 'Data Structures and Algorithms Group assignment', '2024-11-01'),
+(520102, 'Data Structures and Algorithms Analysis', '2024-11-01'),
+
+
+(530101, 'Programming in Java Group assignment', '2025-05-01'),
+(530102, 'Programming in Java Analysis', '2025-05-01'),
+
+
+(520501, 'User Interface Design Group assignment', '2024-08-15'),
+(530501, 'Interactive Systems Development Group assignment', '2024-09-01'),
+(540501, 'Usability Testing and Evaluation Group assignment', '2024-10-10'),
+(520502, 'User Interface Design Analysis', '2024-08-15'),
+(530502, 'Interactive Systems Development Analysis', '2024-09-01'),
+(540502, 'Usability Testing and Evaluation Analysis', '2024-10-10'),
+
+
+
+
+
+-- (620201, 'Electronic Circuits Group assignment', '2025-06-01'),
+-- (620202, 'Electronic Circuits Analysis', '2025-06-01'),
+
+
+
+
+-- (620101, 'Digital Electronics Group assignment', '2024-12-01'),
+-- (620102, 'Digital Electronics Analysis', '2024-12-01'),
+
+
+
+
+
+(630101, 'Advanced Digital Signal Processing Group assignment', '2024-03-15'),
+(640101, 'Digital Signal Processing Applications Group assignment', '2024-04-01'),
+(630102, 'Advanced Digital Signal Processing Analysis', '2024-03-15'),
+(640102, 'Digital Signal Processing Applications Analysis', '2024-04-01')
+
+
+
+
+

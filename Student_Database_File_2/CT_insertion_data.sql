@@ -163,13 +163,13 @@ VALUES
 (610511, 'Electronic Devices and Circuits Lab - Circuit Design', '2024-07-01', '9:00', '10:30'),
 (610512, 'Microelectronics Assignment', '2024-07-15', '9:00', '10:30'),
 
--- Electronic Devices Modeling Course
-(610611, 'Electronic Devices Modeling Project', '2024-07-01', '9:00', '10:30'),
-(610612, 'Circuit Analysis and Design Assignment', '2024-07-15', '9:00', '10:30'),
+-- -- Electronic Devices Modeling Course
+-- (610611, 'Electronic Devices Modeling Project', '2024-07-01', '9:00', '10:30'),
+-- (610612, 'Circuit Analysis and Design Assignment', '2024-07-15', '9:00', '10:30'),
 
 -- Advanced Power Electronics Course
-(620711, 'Advanced Power Electronics Project', '2024-08-01', '9:00', '10:30'),
-(620712, 'Power Electronics Midterm Exam', '2024-08-15', '9:00', '10:30'),
+(620111, 'Advanced Power Electronics Project', '2024-08-01', '9:00', '10:30'),
+(620112, 'Power Electronics Midterm Exam', '2024-08-15', '9:00', '10:30'),
 
 -- Electric Machines Lab Course
 (620311, 'Electric Machines Lab - Simulation Project', '2024-09-01', '9:00', '10:30'),
@@ -184,8 +184,8 @@ VALUES
 (620512, 'Digital Signal Processing in Electronics Assignment', '2024-11-15', '9:00', '10:30'),
 
 -- Microelectronics Lab Course
-(620611, 'Microelectronics Lab - Integrated Circuit Design', '2024-12-01', '9:00', '10:30'),
-(620612, 'High-Frequency Electronics Assignment', '2024-12-15', '9:00', '10:30'),
+(620211, 'Microelectronics Lab - Integrated Circuit Design', '2024-12-01', '9:00', '10:30'),
+(620212, 'High-Frequency Electronics Assignment', '2024-12-15', '9:00', '10:30'),
 
 -- Power System Protection Course
 (630211, 'Power System Protection Project', '2024-02-15', '9:00', '10:30'),
@@ -204,8 +204,8 @@ VALUES
 (630512, 'Advanced High Voltage Systems Assignment', '2024-06-15', '9:00', '10:30'),
 
 -- Smart Grid Technologies Course
-(630611, 'Smart Grid Technologies Implementation', '2024-07-01', '9:00', '10:30'),
-(630612, 'Grid Optimization Project', '2024-07-15', '9:00', '10:30'),
+(630111, 'Smart Grid Technologies Implementation', '2024-07-01', '9:00', '10:30'),
+(630112, 'Grid Optimization Project', '2024-07-15', '9:00', '10:30'),
 
 -- Power Electronics Applications Course
 (640211, 'Power Electronics Applications Project', '2024-08-01', '9:00', '10:30'),
@@ -224,8 +224,8 @@ VALUES
 (640512, 'Power Systems Signal Processing Assignment', '2024-11-15', '9:00', '10:30'),
 
 -- High-Frequency Electronics Course
-(640611, 'High-Frequency Electronics Project', '2024-12-01', '9:00', '10:30'),
-(640612, 'RF Circuit Design Assignment', '2024-12-15', '9:00', '10:30'),
+(640111, 'High-Frequency Electronics Project', '2024-12-01', '9:00', '10:30'),
+(640112, 'RF Circuit Design Assignment', '2024-12-15', '9:00', '10:30'),
 
 
 
@@ -623,7 +623,7 @@ VALUES
 (340411, 'Software Application in Structural Analysis', '2025-07-05', '9:00', '10:30'),
 (340412, 'Parametric Modeling for Structural Design Assignment', '2025-07-20', '9:00', '10:30'),
 (340511, 'Bridge Evaluation and Inspection Report', '2025-08-05', '9:00', '10:30'),
-(340512, 'Advanced Bridge Design Project', '2025-08-20', '9:00', '10:30'),
+(340512, 'Advanced Bridge Design Project', '2025-08-20', '9:00', '10:30');
 
 INSERT INTO CT (CT_ID,CT_TITLE,EXAM_DATE, START_TIME, ENDING_TIME)
 VALUES
@@ -631,7 +631,6 @@ VALUES
 (520112,'Dynamic programming exam','2024-05-01', '9:00', '10:30'),
 (530111,'Introduction of java exam', '2024-03-01', '9:00', '10:30'),
 (530112,'Inheritance exam','2024-05-01', '9:00', '10:30');
-
 
 
 

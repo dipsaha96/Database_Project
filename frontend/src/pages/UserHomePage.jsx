@@ -38,9 +38,9 @@ function UserHomePage() {
                 <h2>User Menu</h2>
             </div>
             <ul className="left-menu-items">
-                <li><Link to={`/profile/${userId}`}>Your Profile Info</Link></li>
-                <li><Link to={`/viewcourses/${userId}`}>View Courses</Link></li>
-                <li><Link to={`/addcourses/${userId}`}>Add Courses</Link></li>
+                <li><Link to={`/students/2105138`}>Your Profile Info</Link></li>
+                <li><Link to={`/viewcourse/${2105138}`}>View Courses</Link></li>
+                <li><Link to={`/courses`}>Add Courses</Link></li>
                 <li><Link to={`/assignments/${userId}`}>Assignments</Link></li>
                 <li><Link to={`/projects/${userId}`}>Projects</Link></li>
                 <li><Link to={`/ct/${userId}`}>CT</Link></li>

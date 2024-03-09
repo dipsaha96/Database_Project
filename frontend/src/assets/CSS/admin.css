@@ -1,18 +1,36 @@
-nav ul {
-    list-style-type: none;
-    padding: 0;
-}
+/* admin.css */
 
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: blue;
-}
-
-nav ul li a:hover {
-    color: red;
-}
+/* Navbar styles */
+.navbar {
+    background-color: #2c3e50; /* Set the background color */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the items horizontally */
+  }
+  
+  .navbar-brand {
+    color: #ffffff; /* Set the text color */
+    font-size: 1.5rem; /* Set the font size */
+  }
+  
+  .nav-link {
+    color: #ffffff; /* Set the text color */
+    font-size: 1.2rem; /* Set the font size */
+  }
+  
+  .nav-link:hover {
+    color: #ffffff; /* Change text color on hover */
+  }
+  
+  .dropdown-menu {
+    background-color: #2c3e50; /* Set the background color */
+  }
+  
+  .dropdown-item {
+    color: #ffffff; /* Set the text color */
+  }
+  
+  .dropdown-item:hover {
+    background-color: #34495e; /* Change background color on hover */
+    color: #ffffff; /* Change text color on hover */
+  }
+  

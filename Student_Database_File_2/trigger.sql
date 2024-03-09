@@ -13,7 +13,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_student
+CREATE OR REPLACE TRIGGER before_insert_student
 BEFORE INSERT ON student
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_student_data();
@@ -48,7 +48,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_course
+CREATE OR REPLACE TRIGGER before_insert_course
 BEFORE INSERT ON course
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_course_data();
@@ -65,7 +65,7 @@ END;
 $$ LANGUAGE plpgsql;
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_department
+CREATE OR REPLACE TRIGGER before_insert_department
 BEFORE INSERT ON department
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_department_data();
@@ -83,7 +83,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_assignment
+CREATE OR REPLACE TRIGGER before_insert_assignment
 BEFORE INSERT ON assignment
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_assignment_data();
@@ -102,7 +102,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_project
+CREATE OR REPLACE TRIGGER before_insert_project
 BEFORE INSERT ON project
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_project_data();
@@ -119,7 +119,7 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
-CREATE TRIGGER before_insert_ct
+CREATE OR REPLACE TRIGGER before_insert_ct
 BEFORE INSERT ON ct
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_ct_data();
@@ -137,7 +137,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Create the trigger to execute the function before each insert operation
-CREATE TRIGGER before_insert_term_final
+CREATE OR REPLACE TRIGGER before_insert_term_final
 BEFORE INSERT ON term_final
 FOR EACH ROW
 EXECUTE FUNCTION uppercase_term_final_data();

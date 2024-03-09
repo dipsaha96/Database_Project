@@ -264,6 +264,29 @@ async function run() {
             }
         });
 
+        app.get("/viewcourse/:userId", async (req, res) => {
+            const userId = req.params.userId;
+            console.log('User ID:', userId);
+            try {
+                const sql = `
+                    SELECT C.COURSE_ID,
+                        C.COURSE_TITLE,
+                        D.NAME AS COURSE_BELONGS_TO,
+                        C.TOTAL_LECTURES,
+                        C.CREDIT
+                    FROM COURSE C 
+                    JOIN DEPARTMENT D ON D.DEPARTMENT_ID = C.COURSE_ID/1000
+                    JOIN STUDENT_COURSE SC ON SC.COURSE_ID = C.COURSE_ID
+                    WHERE SC.STUDENT_ID = $1;
+                `;
+                const { rows } = await pool.query(sql, [userId]);
+                res.json(rows); // Corrected to use 'rows' instead of 'result.rows'
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+        
         app.get('/department', async (req, res) => {
             try {
                 const sql = `
@@ -313,6 +336,36 @@ async function run() {
             }
         });
 
+        app.put('/updatestudent', async (req, res) => {
+            const { studentId, parameter, updatedValue } = req.body;
+          
+            try {
+              const result = await pool.query('CALL update_student_info($1, $2, $3)', [studentId, parameter, updatedValue]);
+              res.status(200).json({ message: 'Student updated successfully' });
+            } catch (error) {
+              console.error('Error updating student:', error);
+              res.status(500).json({ error: 'Internal server error' });
+            }
+          });
+
+          app.put('/updatecourse', async (req, res) => {
+            const { courseId, parameter, updatedValue } = req.body;
+          
+            try {
+              // Call the stored procedure to update course information
+              await pool.query('CALL update_course_info($1, $2, $3)', [courseId, parameter, updatedValue]);
+              
+              // Send success response
+              res.status(200).json({ message: 'Course updated successfully' });
+            } catch (error) {
+              console.error('Error updating course:', error);
+              res.status(500).json({ error: 'Internal server error' });
+            }
+          });
+          
+        
+          
+          
         app.get('/student/:studentId', async (req, res) => {
             const studentId = req.params.studentId;
             console.log('Student ID:', studentId);
@@ -339,6 +392,86 @@ async function run() {
                 res.status(500).json({ error: 'Internal server error' });
             }
         });
+
+        app.get('/courses/:courseID', async (req, res) => {
+            const courseId = req.params.courseID;
+            console.log('Requested Course ID:', courseId);
+            
+            try {
+                const sql = `
+                    SELECT
+                        C.COURSE_ID,
+                        c.course_title,
+                        a.assignment_title AS assignment1_title,
+                        TO_CHAR(a.submission_date,'DD-MM-YYYY') AS assignment1_submission_date,
+                        b.assignment_title AS assignment2_title,
+                        TO_CHAR(b.submission_date,'DD-MM-YYYY') AS assignment2_submission_date,
+                        p.project_title,
+                        TO_CHAR(p.submission_date,'DD-MM-YYYY') AS project_submission_date,
+                        ct1.ct_title AS ct1_title,
+                        TO_CHAR(ct1.exam_date,'DD-MM-YYYY') AS ct1_exam_date,
+                        ct1.START_TIME AS ct1_start_time,
+                        ct1.ENDING_TIME AS ct1_end_time,
+                        ct2.ct_title AS ct2_title,
+                        TO_CHAR(ct2.exam_date,'DD-MM-YYYY') AS ct2_exam_date,
+                        ct2.START_TIME AS ct2_start_time,
+                        ct2.ENDING_TIME AS ct2_end_time,
+                        TO_CHAR(T.exam_date,'DD-MM-YYYY') AS term_final_exam_date,
+                        T.START_TIME AS term_final_start_time,
+                        T.time_duration AS term_final_time_duration,
+                        te.teacher_id,
+                        te.name as teacher_name
+                    FROM 
+                        course_details s
+                        JOIN course c ON s.course_id = c.course_id
+                        JOIN assignment a ON s.assignment1_id = a.assignment_id
+                        JOIN assignment b ON s.assignment2_id = b.assignment_id
+                        JOIN project p ON s.project_id = p.project_id
+                        JOIN ct ct1 ON s.ct1_id = ct1.ct_id
+                        JOIN ct ct2 ON s.ct2_id = ct2.ct_id
+                        JOIN TERM_FINAL T ON T.TERM_FINAL_id = S.TERM_FINAL_id
+                        
+                        JOIN teacher te ON s.teacher_id =te.teacher_id
+                    WHERE 
+                        C.COURSE_ID = $1
+                    GROUP BY 
+                        C.COURSE_ID,
+                        c.course_title,
+                        a.assignment_title,
+                        a.submission_date,
+                        b.assignment_title,
+                        b.submission_date,
+                        p.project_title,
+                        p.submission_date,
+                        ct1.ct_title,
+                        ct1.exam_date,
+                        ct1.START_TIME,
+                        ct1.ENDING_TIME,
+                        ct2.ct_title,
+                        ct2.exam_date,
+                        ct2.START_TIME,
+                        ct2.ENDING_TIME,
+                        T.exam_date,
+                        T.START_TIME,
+                        T.time_duration,
+                        te.teacher_id,
+                        te.name;
+                `;
+                
+                console.log('SQL Query:', sql);
+        
+                const { rows } = await pool.query(sql, [courseId]);
+                
+                if (rows.length > 0) {
+                    res.json(rows[0]);
+                } else {
+                    res.status(404).json({ error: 'Course not found' });
+                }
+            } catch (error) {
+                console.error('Error executing query:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        });        
 
         app.get('/grade', async (req, res) => {
             try {
@@ -373,23 +506,41 @@ async function run() {
             }
         });
 
+        // app.post('/addstudent', async (req, res) => {
+        //     const { studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId } = req.body;
+        //     try {
+        //         console.log("Received student information:", studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId);
+        //         const result = await pool.query(
+        //             'INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
+        //             [studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId]
+        //         );
+        //         res.status(201).json({
+        //             message: "Student added successfully!",
+        //             student: result.rows[0]
+        //         }); // Send back the newly created student
+        //     } catch (error) {
+        //         console.error('Error adding student', error);
+        //         res.status(500).send('Error adding student');
+        //     }
+        // });
+        
+        
         app.post('/addstudent', async (req, res) => {
-            const { studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId } = req.body;
+            const { studentId, name, address, phoneNumber, dateOfBirth, email, bankAccountNo } = req.body;
             try {
-                console.log("Received student information:", studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId);
-                const result = await pool.query(
-                    'INSERT INTO student (student_id, name, address, phone_number, date_of_birth, level, term, email, bank_account_no, department_id) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING *',
-                    [studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId]
+                // Call your database function here
+                await pool.query(
+                    'SELECT insert_student_with_fees_and_supervisor($1, $2, $3, $4, $5, $6, $7)',
+                    [studentId, name, address, phoneNumber, dateOfBirth, email, bankAccountNo]
                 );
-                res.status(201).json({
-                    message: "Student added successfully!",
-                    student: result.rows[0]
-                }); // Send back the newly created student
+        
+                res.status(200).json({ message: 'Student added successfully!' });
             } catch (error) {
                 console.error('Error adding student', error);
                 res.status(500).send('Error adding student');
             }
         });
+        
 
         app.post('/adddepartment', async (req, res) => {
             const { departmentId, name } = req.body;
@@ -427,21 +578,53 @@ async function run() {
             }
         });
 
+        // app.post('/deleteteacher', async (req, res) => {
+        //     const  teacherId  = req.body.teacherId;
+        //     try {
+        //         console.log(teacherId);
+        //         const result = await pool.query('DELETE FROM teacher WHERE teacher_id = $1', [teacherId]);
+        //         if (result.rowCount === 0) {
+        //             res.status(404).json({ error: 'Teacher not found' });
+        //         } else {
+        //             res.status(200).json({ message: 'Teacher deleted successfully!' });
+        //         }
+        //     } catch (error) {
+        //         console.error('Error deleting teacher', error);
+        //         res.status(500).json({ error: 'Failed to delete teacher' });
+        //     }
+        // });
+
         app.post('/deleteteacher', async (req, res) => {
-            const  teacherId  = req.body.teacherId;
+            const teacherId = req.body.teacherId;
             try {
                 console.log(teacherId);
-                const result = await pool.query('DELETE FROM teacher WHERE teacher_id = $1', [teacherId]);
+                // Soft delete teacher record by updating is_deleted and deleted_at columns
+                const result = await pool.query(
+                    'UPDATE teacher SET is_deleted = TRUE, deleted_at = NOW() WHERE teacher_id = $1',
+                    [teacherId]
+                );
                 if (result.rowCount === 0) {
                     res.status(404).json({ error: 'Teacher not found' });
                 } else {
-                    res.status(200).json({ message: 'Teacher deleted successfully!' });
+                    res.status(200).json({ message: 'Teacher soft-deleted successfully!' });
                 }
             } catch (error) {
-                console.error('Error deleting teacher', error);
-                res.status(500).json({ error: 'Failed to delete teacher' });
+                console.error('Error soft-deleting teacher', error);
+                res.status(500).json({ error: 'Failed to soft-delete teacher' });
             }
         });
+
+        setInterval(async () => {
+            try {
+                // Hard delete soft-deleted teachers older than 1 day
+                const deleteResult = await pool.query(
+                    'DELETE FROM teacher WHERE is_deleted = TRUE AND deleted_at < NOW() - INTERVAL \'1 day\''
+                );
+                console.log(`${deleteResult.rowCount} soft-deleted teachers deleted.`);
+            } catch (error) {
+                console.error('Error deleting soft-deleted teachers', error);
+            }
+        }, 24 * 60 * 60 * 1000);
 
         app.post('/deletecourse', async (req, res) => {
             const courseId = req.body.courseId;
@@ -479,7 +662,7 @@ async function run() {
             try {
                 console.log(courseId, courseTitle, startTime, endTime, totalLectures, credit);
               const result = await pool.query(
-                'INSERT INTO course (course_id, course_title, start_time, end_time, totaL_lectures, credit) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
+                'SELECT insert_course_with_teacher_and_details($1, $2, $3, $4, $5, $6)',
                 [courseId, courseTitle, startTime, endTime, totalLectures, credit]
               );
               res.status(201).json({ message: 'Course added successfully', data: result.rows[0] });
@@ -488,7 +671,23 @@ async function run() {
               res.status(500).json({ error: 'Failed to add course' });
             }
         });
-        
+
+        app.post('/addlecture', async (req, res) => {
+            const { lectureId, lectureTitle, courseId } = req.body;
+            try {
+              // Insert the new lecture into the database
+              const result = await pool.query(
+                'INSERT INTO lectures (lecture_id, lecture_title, course_id) VALUES ($1, $2, $3) RETURNING *',
+                [lectureId, lectureTitle, courseId]
+              );
+              // Send a success response
+              res.status(201).json({ message: 'Lecture added successfully', data: result.rows[0] });
+            } catch (error) {
+              // If an error occurs, send an error response
+              console.error('Error adding lecture', error);
+              res.status(500).json({ error: 'Failed to add lecture' });
+            }
+          });
 
     } finally {
         // console.log("Shutting down server");

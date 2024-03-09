@@ -1,0 +1,51 @@
+/* addlecture.css */
+
+/* Container styles */
+.lecture-form-container {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 500px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Form styles */
+  .lecture-form-container form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Form field styles */
+  .lecture-form-container form .form-group {
+    margin-bottom: 15px;
+  }
+  
+  /* Form label styles */
+  .lecture-form-container form label {
+    font-weight: bold;
+  }
+  
+  /* Form input styles */
+  .lecture-form-container form input[type="number"],
+  .lecture-form-container form input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Submit button styles */
+  .lecture-form-container form button[type="submit"] {
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Submit button hover styles */
+  .lecture-form-container form button[type="submit"]:hover {
+    background-color: #0056b3;
+  }
+  
