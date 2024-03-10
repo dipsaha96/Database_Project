@@ -1,28 +1,47 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Add this line to import useParams
+import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../assets/CSS/course.css';
-import UserHomePage from '../pages/UserHomePage';
-import { Link } from 'react-router-dom';
 
 function Course() {
-    const { userId } = useParams(); // Access route parameter userId using useParams
+    const { userId } = useParams();
     const [courses, setCourses] = useState([]);
+    const [showConfirmation, setShowConfirmation] = useState(false);
 
     useEffect(() => {
-        axios.get(`http://localhost:8000/viewcourse/${userId}`)
+        fetchCourses();
+    }, [userId]); // Fetch courses whenever userId changes
+
+    const fetchCourses = () => {
+        axios.get(`http://localhost:8000/availablecourse/${userId}`)
             .then((response) => {                
                 setCourses(response.data);
             })  
             .catch((error) => {
                 console.error(error);
             });
-    }, [userId]); // Include userId in the dependency array
+    };
+
+    const handleAddCourse = async (courseId) => {
+        try {
+            const response = await axios.post(`http://localhost:8000/addstudentcourse/${userId}/${courseId}`);
+            if (response.data && response.data.message) {
+                setShowConfirmation(true);
+                // Fetch courses again to update the list after adding a course
+                fetchCourses();
+            } else {
+                throw new Error('Failed to add course');
+            }
+        } catch (error) {
+            console.error('Error adding course:', error);
+        }
+    };
 
     return (
         <div className="course-container">
-            <h1 className="course-heading">YOUR ENROLLED COURSES</h1>
+            <h1 className="course-heading">Your Available Courses</h1>
             <div className="course-table-container">
+                {showConfirmation && <p>Course added successfully!</p>}
                 <table className="course-table">
                     <thead>
                         <tr>
@@ -43,9 +62,9 @@ function Course() {
                                 <td>{course.total_lectures}</td>
                                 <td>{course.credit}</td>
                                 <td className="actions-column">
-                                    <Link to={`/courses/${course.course_id}`} className="view-link">
-                                        <button className="view-button" onClick={() => handleViewInformation(course.course_id)}>Course Details</button>
-                                    </Link>
+                                    <button className="view-button" onClick={() => handleAddCourse(course.course_id)}>
+                                        Add COURSE
+                                    </button>
                                 </td>
                             </tr>
                         ))}

@@ -12,7 +12,6 @@ function BasicExample() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="#link">Link</Nav.Link>
             <NavDropdown title="Add" id="basic-nav-dropdown">
               <NavDropdown.Item href="/addstudent">Add students</NavDropdown.Item>
               <NavDropdown.Item href="/addteacher">
@@ -52,15 +51,18 @@ function BasicExample() {
                 <NavDropdown.Item href="/deleteproject">Delete Project</NavDropdown.Item>
                 <NavDropdown.Item href="/deletect">Delete CT</NavDropdown.Item>
             </NavDropdown>
-            <NavDropdown title="Others" id="basic-nav-dropdown">
+            <NavDropdown title="View Information" id="basic-nav-dropdown">
               <NavDropdown.Item href="/students">View Students</NavDropdown.Item>
               <NavDropdown.Item href="/teachers">
                 View Teachers
               </NavDropdown.Item>
               <NavDropdown.Item href="/courses">View Courses</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#action/3.4">
-                Separated link
+              <NavDropdown.Item href="/grades">
+                View Grades
+              </NavDropdown.Item>
+              <NavDropdown.Item href="/about">
+                About Project
               </NavDropdown.Item>
             </NavDropdown>
           </Nav>

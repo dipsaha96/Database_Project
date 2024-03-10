@@ -40,14 +40,9 @@ function UserHomePage() {
             <ul className="left-menu-items">
                 <li><Link to={`/students/2105138`}>Your Profile Info</Link></li>
                 <li><Link to={`/viewcourse/${2105138}`}>View Courses</Link></li>
-                <li><Link to={`/courses`}>Add Courses</Link></li>
-                <li><Link to={`/assignments/${userId}`}>Assignments</Link></li>
-                <li><Link to={`/projects/${userId}`}>Projects</Link></li>
-                <li><Link to={`/ct/${userId}`}>CT</Link></li>
-                <li><Link to={`/grades/${userId}`}>Grades</Link></li>
-                <li><Link to={`/fees/${userId}`}>Fees</Link></li>
-                <li><Link to={`/lectures/${userId}`}>Lectures</Link></li>
-                <li><Link to={`/supervisor/${userId}`}>Supervisor</Link></li>
+                <li><Link to={`/addcourse/${2105138}`}>Add Courses</Link></li>
+                <li><Link to={`/grades/${2105138}`}>Grades</Link></li>
+                <li><Link to={`/fees/${2105138}`}>Fees</Link></li>
             </ul>
         </div>
     );

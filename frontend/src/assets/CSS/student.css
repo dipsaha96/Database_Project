@@ -1,25 +1,15 @@
-.student-container {
-    margin-top: 20px;
-    text-align: center;
-    overflow-x: auto; /* Enable horizontal scrolling for small screens */
-}
-
-.student-heading {
-    margin-bottom: 20px;
-    color: #333;
-}
-
 .student-table {
     width: 80%; /* Adjust width as needed */
     margin: 0 auto; /* Center align */
     border-collapse: collapse;
-    border: 1px solid #ddd; /* Add table border */
+    border: 3px solid #333; /* Stronger border */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for elevation */
 }
 
-.student-table th, .student-table td {
+.student-table th,
+.student-table td {
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 3px solid #ddd; /* Stronger border */
 }
 
 .student-table th {
@@ -38,6 +28,7 @@
 .student-table tbody tr:hover {
     background-color: #f2f2f2; /* Hover color */
 }
+
 .view-button {
     font-size: 12px; /* Adjust the font size to make the button smaller */
     padding: 5px 10px;
@@ -60,4 +51,44 @@
 
 .actions-column {
     width: 100px; /* Adjust the width of the column */
+}
+.search-container {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 2px solid #333; /* Stronger border */
+    border-radius: 8px; /* Rounded border corners */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f2f2f2; /* Light background color */
+}
+
+.search-container select,
+.search-container input[type="text"],
+.search-container button {
+    padding: 8px 12px;
+    border-radius: 5px; /* Rounded corners for input elements */
+    border: 1px solid #ccc; /* Lighter border for input elements */
+}
+
+.search-container select {
+    flex: 1; /* Take remaining space */
+    margin-right: 10px;
+}
+
+.search-container input[type="text"] {
+    flex: 2; /* Take double the space */
+    margin-right: 10px;
+}
+
+.search-container button {
+    background-color: #007bff; /* Blue button background color */
+    color: #fff; /* Button text color */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Add transition effect */
+}
+
+.search-container button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
 }

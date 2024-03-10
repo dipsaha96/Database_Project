@@ -1,7 +1,8 @@
+/* course.css */
+
 .course-container {
     margin-top: 20px;
     text-align: center;
-    overflow-x: auto; /* Enable horizontal scrolling for small screens */
 }
 
 .course-heading {
@@ -9,12 +10,24 @@
     color: #333;
 }
 
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-container select, .search-container input, .search-container button {
+    margin-right: 10px;
+}
+
+.course-table-container {
+    overflow-x: auto;
+}
+
 .course-table {
-    width: 80%; /* Adjust width as needed */
-    margin: 0 auto; /* Center align */
+    width: 80%;
+    margin: 0 auto;
     border-collapse: collapse;
-    border: 1px solid #ddd; /* Add table border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for elevation */
+    border: 2px solid #ddd;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .course-table th, .course-table td {
@@ -25,29 +38,47 @@
 .course-table th {
     background-color: #f2f2f2;
     font-weight: bold;
-    border-radius: 8px 8px 0 0; /* Add border-radius to top header cells */
 }
 
 .course-table tbody tr:nth-child(even) {
-    background-color: #f9f9f9; /* Lighter alternating row color */
+    background-color: #5c8b2a4d;
 }
 
 .course-table tbody tr:hover {
-    background-color: #f2f2f2; /* Hover color */
+    background-color: #f2f2f2;
 }
+
+.view-button {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    border: none;
+    background-color: #ff00fb;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.view-button:hover {
+    background-color: #3300b3;
+}
+
+.view-button:active {
+    transform: translateY(1px);
+}
+
 .check-courses-button {
+    display: block;
     margin-top: 20px;
     padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
     border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    text-decoration: none; /* Remove underline from link */
-    display: inline-block; /* Ensure button appears inline */
+    background-color: #ff00fb;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 20px;
+    transition: background-color 0.3s ease;
 }
 
 .check-courses-button:hover {
-    background-color: #0056b3;
+    background-color: #3300b3;
 }

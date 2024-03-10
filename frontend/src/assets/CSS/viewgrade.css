@@ -1,0 +1,49 @@
+.course-information-container {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.course {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    margin-bottom: 20px;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.course h2 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.course p {
+    margin: 0.5em 0;
+    font-size: 1.2rem;
+}
+
+.course-information-container p {
+    font-size: 1.2rem;
+}
+
+.course-information-container h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.course-information-container strong {
+    font-weight: bold;
+}
+
+.course-information-container > div:last-child {
+    margin-top: 20px;
+}
+
+.course-information-container > div:last-child p {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* Add any additional styles as needed */

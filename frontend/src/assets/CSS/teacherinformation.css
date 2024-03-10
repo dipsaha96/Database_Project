@@ -1,0 +1,46 @@
+.teacher-information-container {
+    margin-top: 20px;
+    text-align: center;
+    overflow-x: auto; /* Enable horizontal scrolling for small screens */
+}
+
+.teacher-information-container h1 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.teacher-info-box {
+    width: 80%; /* Adjust width as needed */
+    margin: 0 auto; /* Center align */
+    border-collapse: collapse;
+    border: 2px solid #ddd; /* Add stronger table border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add box-shadow for elevation */
+    border-radius: 8px; /* Add border radius */
+    padding: 20px; /* Add padding */
+}
+
+.teacher-info-box p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.update-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none; /* Remove underline from link */
+    display: inline-block; /* Ensure button appears inline */
+}
+
+.update-button:hover {
+    background-color: #0056b3;
+}
+
+.update-button:active {
+    transform: translateY(1px); /* Add slight downward movement on click */
+}

@@ -5,6 +5,7 @@ export default function Home() {
     return (
         <div>
             <Img></Img>
+            <h2><center>STUDENT SURVEY</center></h2>
         </div>
     );
 }

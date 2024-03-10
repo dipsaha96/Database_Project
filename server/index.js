@@ -225,37 +225,58 @@ async function run() {
         
         
 
+        // app.get("/teacher", async (req, res) => {
+        //     try {
+        //         const sql = `
+        //     SELECT T.TEACHER_ID,
+        //     T.NAME AS FULL_NAME,
+        //     T.EMAIL,
+        //     T.ADDRESS,
+        //     D.NAME AS DEPARTMENT_NAME,
+        //     T.PHONE_NUMBER
+        //     FROM TEACHER T
+        //     JOIN DEPARTMENT D ON T.DEPARTMENT_ID = D.DEPARTMENT_ID;
+        //     `;
+        //         const result = await pool.query(sql);
+        //         console.log(result.rows);
+        //         res.json(result.rows);
+        //     } catch (err) {
+        //         console.error(`PostgreSQL Error: ${error.message}`);
+        //         res.status(500).json({ error: "Internal Server Error" });
+        //     }
+        // });
+
         app.get("/teacher", async (req, res) => {
             try {
-                const sql = `
-            SELECT T.TEACHER_ID,
-            T.NAME AS FULL_NAME,
-            T.EMAIL,
-            T.ADDRESS,
-            D.NAME AS DEPARTMENT_NAME,
-            T.PHONE_NUMBER
-            FROM TEACHER T
-            JOIN DEPARTMENT D ON T.DEPARTMENT_ID = D.DEPARTMENT_ID;
-            `;
-                const result = await pool.query(sql);
-                console.log(result.rows);
-                res.json(result.rows);
-            } catch (err) {
-                console.error(`PostgreSQL Error: ${error.message}`);
-                res.status(500).json({ error: "Internal Server Error" });
-            }
-        });
-        app.get("/course", async (req, res) => {
-            try {
-                const sql = `
-                SELECT C.COURSE_ID,
-	            C.COURSE_TITLE,
-	            D.NAME AS COURSE_BELONGS_TO,
-	            C.TOTAL_LECTURES,
-	            C.CREDIT
-	            FROM COURSE C JOIN DEPARTMENT D
-	            ON D.DEPARTMENT_ID = C.COURSE_ID/1000;
+                const { teacher_id, department_id } = req.query;
+        
+                let sql = `
+                    SELECT 
+                        T.TEACHER_ID,
+                        T.NAME AS FULL_NAME,
+                        T.EMAIL,
+                        T.ADDRESS,
+                        D.NAME AS DEPARTMENT_NAME,
+                        T.PHONE_NUMBER
+                    FROM 
+                        TEACHER T
+                    JOIN 
+                        DEPARTMENT D ON T.DEPARTMENT_ID = D.DEPARTMENT_ID
                 `;
+        
+                let conditions = [];
+        
+                if (teacher_id) {
+                    conditions.push(`T.TEACHER_ID = '${teacher_id}'`);
+                }
+                if (department_id) {
+                    conditions.push(`T.DEPARTMENT_ID = ${parseInt(department_id)}`);
+                }
+        
+                if (conditions.length > 0) {
+                    sql += ` WHERE ${conditions.join(" AND ")}`;
+                }
+        
                 const result = await pool.query(sql);
                 res.json(result.rows);
             } catch (error) {
@@ -263,6 +284,93 @@ async function run() {
                 res.status(500).json({ error: "Internal Server Error" });
             }
         });
+        
+        
+        
+        // app.get("/course", async (req, res) => {
+        //     try {
+        //         const sql = `
+        //         SELECT C.COURSE_ID,
+	    //         C.COURSE_TITLE,
+	    //         D.NAME AS COURSE_BELONGS_TO,
+	    //         C.TOTAL_LECTURES,
+	    //         C.CREDIT
+	    //         FROM COURSE C JOIN DEPARTMENT D
+	    //         ON D.DEPARTMENT_ID = C.COURSE_ID/1000;
+        //         `;
+        //         const result = await pool.query(sql);
+        //         res.json(result.rows);
+        //     } catch (error) {
+        //         console.error(`PostgreSQL Error: ${error.message}`);
+        //         res.status(500).json({ error: "Internal Server Error" });
+        //     }
+        // });
+
+        app.get("/course", async (req, res) => {
+            try {
+                let sql = `
+                    SELECT C.COURSE_ID,
+                    C.COURSE_TITLE,
+                    D.NAME AS COURSE_BELONGS_TO,
+                    C.TOTAL_LECTURES,
+                    C.CREDIT
+                    FROM COURSE C JOIN DEPARTMENT D
+                    ON D.DEPARTMENT_ID = C.COURSE_ID/1000
+                `;
+        
+                const { course_id, credit, total_lectures } = req.query;
+                let conditions = [];
+        
+                if (course_id) {
+                    conditions.push(`C.COURSE_ID = '${course_id}'`);
+                }
+                if (credit) {
+                    conditions.push(`C.CREDIT = ${parseInt(credit)}`);
+                }
+                if (total_lectures) {
+                    conditions.push(`C.TOTAL_LECTURES = ${parseInt(total_lectures)}`);
+                }
+        
+                if (conditions.length > 0) {
+                    sql += ` WHERE ${conditions.join(" AND ")}`;
+                }
+        
+                const result = await pool.query(sql);
+                res.json(result.rows);
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+
+        app.get("/grades", async (req, res) => {
+            try {
+                let sql = `
+                    SELECT s.STUDENT_ID,
+                        s.NAME AS STUDENT_NAME,
+                        d.NAME AS DEPARTMENT_NAME,
+                        calculate_cgpa(s.STUDENT_ID) AS CGPA
+                    FROM STUDENT s
+                    JOIN DEPARTMENT d ON s.DEPARTMENT_ID = d.DEPARTMENT_ID
+                `;
+        
+                const { search } = req.query;
+                if (search) {
+                    // Assuming the search criteria should match either the student ID or name
+                    sql += ` WHERE s.STUDENT_ID = $1 OR LOWER(s.NAME) LIKE LOWER($2)`;
+                    const values = [`%${search}%`, `%${search}%`];
+                    const result = await pool.query(sql, values);
+                    res.json(result.rows);
+                } else {
+                    const result = await pool.query(sql);
+                    res.json(result.rows);
+                }
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+        
 
         app.get("/viewcourse/:userId", async (req, res) => {
             const userId = req.params.userId;
@@ -286,6 +394,84 @@ async function run() {
                 res.status(500).json({ error: "Internal Server Error" });
             }
         });
+
+        app.get("/viewgrade", async (req, res) => {
+            try {
+                const sql = `
+                SELECT s.STUDENT_ID,s.NAME AS STUDENT_NAME,D.name AS DEPARTMENT_NAME,
+                calculate_cgpa(STUDENT_ID) AS CGPA
+                FROM STUDENT S JOIN DEPARTMENT D
+                ON S.DEPARTMENT_ID = D.DEPARTMENT_ID;
+            `;
+                const result = await pool.query(sql);
+                console.log(result.rows);
+                res.json(result.rows);
+            } catch (err) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+
+        app.get("/availablecourse/:userId", async (req, res) => {
+            const userId = req.params.userId;
+            console.log('User ID:', userId);
+            try {
+                const sql = `
+                SELECT C.COURSE_ID,
+                C.COURSE_TITLE,
+                D.NAME AS COURSE_BELONGS_TO,
+                C.TOTAL_LECTURES,
+                C.CREDIT
+         FROM COURSE C
+         JOIN DEPARTMENT D ON D.DEPARTMENT_ID = C.COURSE_ID / 1000
+         WHERE C.COURSE_ID NOT IN (
+             SELECT SC.COURSE_ID
+             FROM STUDENT_COURSE SC
+             WHERE SC.STUDENT_ID = $1
+         )
+         AND C.COURSE_ID / 1000 = (
+             SELECT D.DEPARTMENT_ID
+             FROM STUDENT S
+             JOIN DEPARTMENT D ON D.DEPARTMENT_ID = S.DEPARTMENT_ID
+             WHERE S.STUDENT_ID = $1
+         )
+         AND (C.COURSE_ID/100)%10 = (
+             SELECT S.LEVEL
+             FROM STUDENT S
+             WHERE S.STUDENT_ID = $1
+         );
+                `;
+                const { rows } = await pool.query(sql, [userId]);
+                res.json(rows); // Corrected to use 'rows' instead of 'result.rows'
+            } catch (error) {
+                console.error(`PostgreSQL Error: ${error.message}`);
+                res.status(500).json({ error: "Internal Server Error" });
+            }
+        });
+
+        app.post('/addstudentcourse/:userId/:courseId', async (req, res) => {
+            try {
+              // Extract userId and courseId from request parameters
+              const { userId, courseId } = req.params;
+              console.log(userId, courseId);
+              
+              // Dummy value for teacherId (null as per requirement)
+              const teacherId = null;
+          
+              // Insert data into the STUDENT_COURSE table
+              const result = await pool.query(
+                'INSERT INTO STUDENT_COURSE (STUDENT_ID, TEACHER_ID, COURSE_ID) VALUES ($1, $2, $3)',
+                [userId, teacherId, courseId]
+              );
+          
+              // Send success response
+              res.status(200).json({ message: 'Course Added successfully' });
+            } catch (error) {
+              // Handle errors
+              console.error('Error inserting data:', error);
+              res.status(500).json({ error: 'Failed to insert data' });
+            }
+          });
         
         app.get('/department', async (req, res) => {
             try {
@@ -348,20 +534,24 @@ async function run() {
             }
           });
 
-          app.put('/updatecourse', async (req, res) => {
-            const { courseId, parameter, updatedValue } = req.body;
-          
-            try {
-              // Call the stored procedure to update course information
-              await pool.query('CALL update_course_info($1, $2, $3)', [courseId, parameter, updatedValue]);
-              
-              // Send success response
-              res.status(200).json({ message: 'Course updated successfully' });
-            } catch (error) {
-              console.error('Error updating course:', error);
-              res.status(500).json({ error: 'Internal server error' });
-            }
-          });
+          // Backend code for updating course information
+
+app.put('/updatecourse', async (req, res) => {
+    const { courseId, parameter, updatedValue } = req.body;
+    
+    try {
+        // Call the stored procedure to update course information
+        await pool.query('CALL update_course_info($1, $2, $3)', [courseId, parameter, updatedValue]);
+        
+        // Send success response
+        res.status(200).json({ message: 'Course updated successfully' });
+    } catch (error) {
+        console.error('Error updating course:', error);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+
           
         
           
@@ -392,6 +582,35 @@ async function run() {
                 res.status(500).json({ error: 'Internal server error' });
             }
         });
+
+
+        app.get('/teacher/:teacherId', async (req, res) => {
+            const teacherId = req.params.teacherId;
+            console.log('Teacher ID:', teacherId);
+            try {
+                const sql = `
+                    SELECT 
+                        TEACHER_ID,
+                        NAME,
+                        PHONE_NUMBER,
+                        EMAIL,
+                        ADDRESS,
+                        DEPARTMENT_ID
+                    FROM TEACHER 
+                    WHERE TEACHER_ID = $1;
+                `;
+                const { rows } = await pool.query(sql, [teacherId]);
+                if (rows.length > 0) {
+                    res.json(rows[0]);
+                } else {
+                    res.status(404).json({ error: 'Teacher not found' });
+                }
+            } catch (error) {
+                console.error('Error executing query:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        });
+        
 
         app.get('/courses/:courseID', async (req, res) => {
             const courseId = req.params.courseID;
@@ -471,40 +690,173 @@ async function run() {
                 console.error('Error executing query:', error);
                 res.status(500).json({ error: 'Internal server error' });
             }
-        });        
-
-        app.get('/grade', async (req, res) => {
+        });
+        
+        
+        app.get('/grades/:userID', async (req, res) => {
+            const userId = req.params.userID;
+            console.log('Requested user ID:', userId);
+            
             try {
                 const sql = `
-        SELECT 
-            S.STUDENT_ID AS ID,
-            S.NAME AS STUDENT_NAME,
-            G.TERM_WISE_RESULT AS RECENT_TERM_CGPA,
-            G.TOTAL_RESULT AS OVERALL_CGPA,
-            CASE
-                WHEN G.TOTAL_RESULT >= 4.0 THEN 'A+'
-                WHEN G.TOTAL_RESULT >= 3.75 THEN 'A'
-                WHEN G.TOTAL_RESULT >= 3.5 THEN 'A-'
-                WHEN G.TOTAL_RESULT >= 3.25 THEN 'B+'
-                WHEN G.TOTAL_RESULT >= 3.0 THEN 'B'
-                WHEN G.TOTAL_RESULT >= 2.75 THEN 'B-'
-                WHEN G.TOTAL_RESULT >= 2.5 THEN 'C+'
-                WHEN G.TOTAL_RESULT >= 2.25 THEN 'C'
-                WHEN G.TOTAL_RESULT >= 2.00 THEN 'D'
-                ELSE 'F'
-            END AS GRADES
-        FROM 
-            STUDENT S 
-        JOIN 
-            GRADE G ON S.STUDENT_ID = G.STUDENT_ID;
-        `;
-                const result = await pool.query(sql);
-                res.json(result.rows);
+                    SELECT
+                    SA.COURSE_ID,
+                    C.Course_title,
+                    C.credit,
+                    A1.ASSIGNMENT_TITLE AS ASSIGNMENT1_TITLE,
+                    A2.ASSIGNMENT_TITLE AS ASSIGNMENT2_TITLE,
+                    CT1.CT_TITLE AS CT1_TITLE,
+                    CT2.CT_TITLE AS CT2_TITLE,
+                    SA.ATTENDENCES_MARK,
+                    SA.ASSIGNMENT1_MARK,
+                    SA.ASSIGNMENT2_MARK,
+                    SA.PROJECT_MARK,
+                    SA.CT1_MARK,
+                    SA.CT2_MARK,
+                    SA.TERM_FINAL_MARK,
+                    (
+                        (SA.TERM_FINAL_MARK * 0.5) +
+                        ((SA.CT1_MARK + SA.CT2_MARK) / 4) +
+                        (SA.ATTENDENCES_MARK) +
+                        ((SA.ASSIGNMENT1_MARK + SA.ASSIGNMENT2_MARK) / 2) +
+                        (SA.PROJECT_MARK / 2.5)
+                    ) AS TOTAL_MARK,
+                    CASE
+                        WHEN 
+                        (SA.TERM_FINAL_MARK * 0.5) +
+                        ((SA.CT1_MARK + SA.CT2_MARK) / 4) +
+                        (SA.ATTENDENCES_MARK) +
+                        ((SA.ASSIGNMENT1_MARK + SA.ASSIGNMENT2_MARK) / 2) +
+                        (SA.PROJECT_MARK / 2.5) >= 80 THEN 4.0
+                        WHEN 
+                        (SA.TERM_FINAL_MARK * 0.5) +
+                        ((SA.CT1_MARK + SA.CT2_MARK) / 4) +
+                        (SA.ATTENDENCES_MARK) +
+                        ((SA.ASSIGNMENT1_MARK + SA.ASSIGNMENT2_MARK) / 2) +
+                        (SA.PROJECT_MARK / 2.5)>= 70 THEN 3.5
+                        WHEN 
+                        (SA.TERM_FINAL_MARK * 0.5) +
+                        ((SA.CT1_MARK + SA.CT2_MARK) / 4) +
+                        (SA.ATTENDENCES_MARK) +
+                        ((SA.ASSIGNMENT1_MARK + SA.ASSIGNMENT2_MARK) / 2) +
+                        (SA.PROJECT_MARK / 2.5)>= 60 THEN 3.0
+                        WHEN 
+                        (SA.TERM_FINAL_MARK * 0.5) +
+                        ((SA.CT1_MARK + SA.CT2_MARK) / 4) +
+                        (SA.ATTENDENCES_MARK) +
+                        ((SA.ASSIGNMENT1_MARK + SA.ASSIGNMENT2_MARK) / 2) +
+                        (SA.PROJECT_MARK / 2.5)>= 50 THEN 2.5
+                        WHEN 
+                        (SA.TERM_FINAL_MARK * 0.5) +
+                        ((SA.CT1_MARK + SA.CT2_MARK) / 4) +
+                        (SA.ATTENDENCES_MARK) +
+                        ((SA.ASSIGNMENT1_MARK + SA.ASSIGNMENT2_MARK) / 2) +
+                        (SA.PROJECT_MARK / 2.5) >= 40 THEN 2.0
+                        ELSE 0.0
+                    END AS CGPA
+                FROM
+                    STUDENT_ALL SA
+                JOIN
+                    ASSIGNMENT A1 ON A1.ASSIGNMENT_ID = SA.ASSIGNMENT1_ID
+                JOIN
+                    ASSIGNMENT A2 ON A2.ASSIGNMENT_ID = SA.ASSIGNMENT2_ID
+                JOIN
+                    CT CT1 ON CT1.CT_ID = SA.CT1_ID
+                JOIN
+                    CT CT2 ON CT2.CT_ID = SA.CT2_ID
+                JOIN
+                    PROJECT P ON P.PROJECT_ID = SA.PROJECT_ID
+                JOIN
+                    TERM_FINAL TF ON TF.TERM_FINAL_ID = SA.TERM_FINAL_ID
+                JOIN
+                    COURSE C ON C.COURSE_ID =SA.COURSE_ID
+                WHERE SA.STUDENT_ID = $1;
+                `;
+                
+                const { rows } = await pool.query(sql, [userId]);
+                
+                if (rows.length > 0) {
+                    res.json(rows); // Return array of course information
+                } else {
+                    res.status(404).json({ error: 'User not found' });
+                }
             } catch (error) {
-                console.error(`PostgreSQL Error: ${error.message}`);
-                res.status(500).json({ error: "Internal Server Error" });
+                console.error('Error executing query:', error);
+                res.status(500).json({ error: 'Internal server error' });
             }
         });
+
+        app.get('/fees/:userID', async (req, res) => {
+            const userId = req.params.userID;
+        
+            try {
+                const query = `
+                    SELECT * FROM fees WHERE student_id = $1;
+                `;
+                
+                const { rows } = await pool.query(query, [userId]);
+        
+                if (rows.length > 0) {
+                    res.json(rows[0]);
+                } else {
+                    res.status(404).json({ error: 'Fees information not found for the specified user ID' });
+                }
+            } catch (error) {
+                console.error('Error fetching fees information:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        });
+
+
+        app.put('/fees/:userID', async (req, res) => {
+            const userID = req.params.userID;
+            const { dueAmount } = req.body;
+        
+            try {
+                const query = 'UPDATE fees SET due_amount = 5350-$1 WHERE student_id = $2';
+                await pool.query(query, [dueAmount, userID]);
+        
+                res.json({ message: 'Due amount updated successfully' });
+            } catch (error) {
+                console.error('Error updating due amount:', error);
+                res.status(500).json({ error: 'Internal server error' });
+            }
+        });
+        
+        
+        // app.get('/grade', async (req, res) => {
+        //     try {
+        //         const sql = `
+        // SELECT 
+        //     S.STUDENT_ID AS ID,
+        //     S.NAME AS STUDENT_NAME,
+        //     G.TERM_WISE_RESULT AS RECENT_TERM_CGPA,
+        //     G.TOTAL_RESULT AS OVERALL_CGPA,
+        //     CASE
+        //         WHEN G.TOTAL_RESULT >= 4.0 THEN 'A+'
+        //         WHEN G.TOTAL_RESULT >= 3.75 THEN 'A'
+        //         WHEN G.TOTAL_RESULT >= 3.5 THEN 'A-'
+        //         WHEN G.TOTAL_RESULT >= 3.25 THEN 'B+'
+        //         WHEN G.TOTAL_RESULT >= 3.0 THEN 'B'
+        //         WHEN G.TOTAL_RESULT >= 2.75 THEN 'B-'
+        //         WHEN G.TOTAL_RESULT >= 2.5 THEN 'C+'
+        //         WHEN G.TOTAL_RESULT >= 2.25 THEN 'C'
+        //         WHEN G.TOTAL_RESULT >= 2.00 THEN 'D'
+        //         ELSE 'F'
+        //     END AS GRADES
+        // FROM 
+        //     STUDENT S 
+        // JOIN 
+        //     GRADE G ON S.STUDENT_ID = G.STUDENT_ID;
+        // `;
+        //         const result = await pool.query(sql);
+        //         res.json(result.rows);
+        //     } catch (error) {
+        //         console.error(`PostgreSQL Error: ${error.message}`);
+        //         res.status(500).json({ error: "Internal Server Error" });
+        //     }
+        // });
+
 
         // app.post('/addstudent', async (req, res) => {
         //     const { studentId, name, address, phoneNumber, dateOfBirth, level, term, email, bankAccountNo, departmentId } = req.body;

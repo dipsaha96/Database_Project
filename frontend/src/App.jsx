@@ -32,6 +32,13 @@ import UpdateStudent from './pages/UpdateStudent';
 import UpdateCourse from './pages/UpdateCourse';
 import AddLecture from './pages/AddLecture';
 import UserViewCourse from './pages/UserViewCourse';
+import UserAddCourse from './pages/UserAddCourse';
+import AvailableCourse from './pages/AvailableCourse';
+import TeacherInformation from './pages/TeacherInformation';
+import ViewGrade from './pages/ViewGrade';
+import Fees from './pages/Fees';
+import About from './pages/About';
+
 
 export default function App() {
   const router = createBrowserRouter(
@@ -64,6 +71,15 @@ export default function App() {
         <Route path="/updatecourse" element={<UpdateCourse></UpdateCourse>} />
         <Route path="/addlecture" element={<AddLecture></AddLecture>} />
         <Route path="/viewcourse/:userId" element={<UserViewCourse></UserViewCourse>} />
+        <Route path="/addcourse/:userId" element={<UserAddCourse></UserAddCourse>} />
+        <Route path="/availablecourse/:userId" element={<AvailableCourse></AvailableCourse>} />
+        <Route path="/teacher/:teacherId" element={<TeacherInformation></TeacherInformation>} />
+        <Route path="/grades/:userID" element={<ViewGrade />} />
+        <Route path="/fees/:userID" element={<Fees />} />
+        <Route path="/about" element={<About />} />
+
+
+
 
 
       </Route>

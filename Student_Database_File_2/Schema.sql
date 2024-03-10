@@ -43,7 +43,7 @@ CREATE TABLE COURSE (
 
 --DROP TABLE LECTURES
 CREATE TABLE LECTURES (
-    LECTURE_ID INT,
+    LECTURE_ID SERIAL,
     LECTURE_TITLE VARCHAR(255),
     COURSE_ID INT,
 	PRIMARY KEY(LECTURE_ID,COURSE_ID),
@@ -197,4 +197,13 @@ CREATE TABLE STUDENT_GRADE (
 );
 
 
+select bank_account_no
+from student
+where student_id=2105138
 
+
+SELECT f.dining_fee,f.hall_fee,f.registration_fee,f.due_amount,
+s.bank_account_no as bank_account
+FROM fees f JOIN student s
+ON f.student_id = s.student_id 
+ WHERE S.student_id = 2105138;

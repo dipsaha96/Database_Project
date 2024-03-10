@@ -4,23 +4,64 @@ import '../assets/CSS/course.css';
 
 function Course() {
     const [courses, setCourses] = useState([]);
+    const [searchCriteria, setSearchCriteria] = useState("course_id");
+    const [searchValue, setSearchValue] = useState("");
 
     useEffect(() => {
-        fetch("http://localhost:8000/course")
-            .then((response) => response.json())
-            .then((data) => setCourses(data))
-            .catch((error) => console.error(error));
+        fetchCourses();
     }, []);
 
-    const handleViewInformation = (courseId) => {
-        // Log the course ID in the console
-        console.log("Course ID:", courseId);
+    const fetchCourses = () => {
+        let url = "http://localhost:8000/course";
+    
+        if (searchCriteria !== "course_id" && searchValue.trim() !== "") {
+            url += `?${searchCriteria}=${searchValue}`;
+        }
+    
+        fetch(url)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then((data) => setCourses(data))
+            .catch((error) => console.error(error));
     };
 
+    const handleSearch = () => {
+        fetchCourses();
+    };
+
+    const handleSelectChange = (e) => {
+        setSearchCriteria(e.target.value);
+        setSearchValue("");
+    };
+
+    const handleInputChange = (e) => {
+        setSearchValue(e.target.value);
+    };
+
+    const handleViewInformation = (courseId) => {
+        console.log("Course ID:", courseId);
+    };
 
     return (
         <div className="course-container">
             <h1 className="course-heading">ALL COURSES</h1>
+            <div className="search-container">
+                <select value={searchCriteria} onChange={handleSelectChange}>
+                    <option value="credit">Credit</option>
+                    <option value="total_lectures">Total Lectures</option>
+                </select>
+                <input
+                    type="text"
+                    placeholder={`Enter ${ searchCriteria === "credit" ? "Credit" : "Total Lectures"}`}
+                    value={searchValue}
+                    onChange={handleInputChange}
+                />
+                <button onClick={handleSearch}>Search</button>
+            </div>
             <div className="course-table-container">
                 <table className="course-table">
                     <thead>
@@ -51,7 +92,6 @@ function Course() {
                     </tbody>
                 </table>
             </div>
-            <Link to="/available-courses" className="check-courses-button">Check Your Available Courses</Link>
         </div>
     );
 }

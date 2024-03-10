@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import '../assets/CSS/studentInformation.css';
+import { Link } from "react-router-dom";
 
 function StudentInformation() {
     const { studentId } = useParams();
@@ -31,7 +32,9 @@ function StudentInformation() {
                     <p><strong>Term:</strong> {student.term}</p>
                 </div>
             )}
-            <button className="update-button">Update Information</button>
+            <Link to={`/updatestudent`} className="view-link">
+            <button className="view-button">Update Information</button>
+            </Link>
         </div>
     );
 }
